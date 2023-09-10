@@ -25,8 +25,12 @@ export class TimerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const currentTime = new Date();
+    const offset = currentTime.getTimezoneOffset() / 60;
+    currentTime.setMinutes(currentTime.getMinutes() + offset);
+
     this.remainingTime = Math.ceil(
-      (this.end.getTime() - new Date().getTime()) / 1000
+      (this.end.getTime() - currentTime.getTime()) / 1000
     );
     this.startCountdown();
   }

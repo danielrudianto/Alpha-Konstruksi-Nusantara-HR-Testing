@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
@@ -15,6 +16,8 @@ import { Editor, Toolbar } from 'ngx-editor';
   styleUrls: ['./question-card.component.css'],
 })
 export class QuestionCardComponent implements OnInit, OnDestroy, OnChanges {
+  constructor(private snackBar: MatSnackBar) {}
+
   @Input('data') data: any;
   @Input('index') index!: number;
   @Input('length') length!: number;
@@ -63,7 +66,18 @@ export class QuestionCardComponent implements OnInit, OnDestroy, OnChanges {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
       reader.onload = () => {
-        this.html = reader.result;
+        // Check file size, if it's bigger than 5MB, don't upload it
+        if (file.size > 5000000) {
+          this.snackBar.open(
+            'Ukuran file terlalu besar. Maksimal 5MB.',
+            'Tutup',
+            {
+              duration: 1000,
+            }
+          );
+        } else {
+          this.html = reader.result;
+        }
       };
     }
   }

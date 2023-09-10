@@ -38,7 +38,7 @@ export class PreliminaryComponent implements OnInit {
     this.isSubmitting = true;
     // this.router.navigate(['/Information']);
     this.http
-      .post('https://api.alphakonstruksi.id/token/check', {
+      .post('http://localhost:5000/token/check', {
         token: this.formGroup.controls['token'].value,
       })
       .subscribe({
@@ -70,7 +70,7 @@ export class PreliminaryComponent implements OnInit {
           this.router.navigate(['/Information']);
         },
         error: (error) => {
-          this.snackBar.open(error.message, 'Tutup', {
+          this.snackBar.open(error.error.message, 'Tutup', {
             duration: 1000,
           });
         },

@@ -14,7 +14,7 @@ import { ConfirmationDialogComponent } from 'src/app/component/confirmation-dial
 export class QuizComponent implements OnInit {
   questions: any[] = [];
   index: number = 0;
-  endTime: Date = new Date();
+  endTime: Date | null = null;
 
   isLoading: boolean = false;
 
@@ -34,7 +34,7 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get('https://api.alphakonstruksi.id/test', {
+      .get('http://localhost:5000/test', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('authorization'),
@@ -43,10 +43,15 @@ export class QuizComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
           this.questions = data['questions'];
+          // The expiredAt is in GMT+0, so we need to convert it to local time
           this.endTime = new Date(data['expiredAt']);
+          const currentTime = new Date();
+
+          const offset = currentTime.getTimezoneOffset() / 60;
+          currentTime.setMinutes(currentTime.getMinutes() + offset);
 
           // If the test has expired, redirect to home page
-          if (this.endTime.getTime() < new Date().getTime()) {
+          if (this.endTime.getTime() < currentTime.getTime()) {
             this.snackBar.open(
               'Waktu ujian telah habis. Terima kasih atas waktunya.',
               'Tutup',
@@ -78,6 +83,24 @@ export class QuizComponent implements OnInit {
   }
 
   onNextQuestion(event: any) {
+    const currentTime = new Date();
+    const offset = currentTime.getTimezoneOffset() / 60;
+    currentTime.setMinutes(currentTime.getMinutes() + offset);
+
+    // If already expired, redirect to home page
+    if (
+      this.endTime != null &&
+      this.endTime.getTime() < currentTime.getTime()
+    ) {
+      this.snackBar.open(
+        'Waktu ujian telah habis. Terima kasih atas waktunya.',
+        'Tutup',
+        {
+          duration: 1000,
+        }
+      );
+    }
+
     if (this.index == this.questions.length - 1) {
       this.questions[this.index].answer = event == undefined ? null : event;
       const dialog = this.dialog.open(ConfirmationDialogComponent, {
@@ -96,6 +119,24 @@ export class QuizComponent implements OnInit {
   }
 
   onPreviousQuestion(event: any) {
+    const currentTime = new Date();
+    const offset = currentTime.getTimezoneOffset() / 60;
+    currentTime.setMinutes(currentTime.getMinutes() + offset);
+
+    // If already expired, redirect to home page
+    if (
+      this.endTime != null &&
+      this.endTime.getTime() < currentTime.getTime()
+    ) {
+      this.snackBar.open(
+        'Waktu ujian telah habis. Terima kasih atas waktunya.',
+        'Tutup',
+        {
+          duration: 1000,
+        }
+      );
+    }
+
     this.questions[this.index].answer = event;
     if (this.index == 0) {
       return;
@@ -105,6 +146,24 @@ export class QuizComponent implements OnInit {
   }
 
   submit() {
+    const currentTime = new Date();
+    const offset = currentTime.getTimezoneOffset() / 60;
+    currentTime.setMinutes(currentTime.getMinutes() + offset);
+
+    // If already expired, redirect to home page
+    if (
+      this.endTime != null &&
+      this.endTime.getTime() < currentTime.getTime()
+    ) {
+      this.snackBar.open(
+        'Waktu ujian telah habis. Terima kasih atas waktunya.',
+        'Tutup',
+        {
+          duration: 1000,
+        }
+      );
+    }
+
     const result = [];
     for (let i = 0; i < this.questions.length; i++) {
       if (this.questions[i].type == 'drawing') {
@@ -125,7 +184,7 @@ export class QuizComponent implements OnInit {
 
     this.isLoading = true;
     this.http
-      .post('https://api.alphakonstruksi.id/test', result, {
+      .post('http://localhost:5000/test', result, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('authorization'),
