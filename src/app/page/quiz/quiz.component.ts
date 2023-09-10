@@ -34,7 +34,7 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get('http://api.alphakonstruksi.id/test', {
+      .get('https://api.alphakonstruksi.id/test', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('authorization'),
@@ -44,6 +44,19 @@ export class QuizComponent implements OnInit {
         next: (data: any) => {
           this.questions = data['questions'];
           this.endTime = new Date(data['expiredAt']);
+
+          // If the test has expired, redirect to home page
+          if (this.endTime.getTime() < new Date().getTime()) {
+            this.snackBar.open(
+              'Waktu ujian telah habis. Terima kasih atas waktunya.',
+              'Tutup',
+              {
+                duration: 1000,
+              }
+            );
+
+            this.router.navigate(['/']);
+          }
         },
         error: (error) => {
           this.snackBar.open(error.error.message, 'Tutup', {
@@ -112,7 +125,7 @@ export class QuizComponent implements OnInit {
 
     this.isLoading = true;
     this.http
-      .post('http://api.alphakonstruksi.id/test', result, {
+      .post('https://api.alphakonstruksi.id/test', result, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('authorization'),

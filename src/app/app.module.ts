@@ -32,6 +32,7 @@ import { AddExperienceComponent } from './page/information/add-experience/add-ex
 import { AddCertificationComponent } from './page/information/add-certification/add-certification.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
+import { TimePipe } from './pipes/time.pipe';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
     AddExperienceComponent,
     AddCertificationComponent,
     ConfirmationDialogComponent,
+    TimePipe,
   ],
   imports: [
     BrowserModule,
