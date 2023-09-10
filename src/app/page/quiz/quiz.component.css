@@ -1,0 +1,9 @@
+.question-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.question-card {
+  flex-grow: 1;
+}

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <div class="question-wrapper" *ngIf="!isLoading">
+        <div class="question-card">
+          <app-question-type
+            [types]="questionTypes"
+            [length]="questionsLength"
+            [index]="
+              questions[index].type == 'civil'
+                ? 0
+                : questions[index].type == 'geo'
+                ? 1
+                : 2
+            "
+          ></app-question-type>
+          <app-question-card
+            [data]="questions[index]"
+            [index]="index"
+            [length]="questions.length"
+            (next)="onNextQuestion($event)"
+            (previous)="onPreviousQuestion($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-timer [end]="endTime"></app-timer>

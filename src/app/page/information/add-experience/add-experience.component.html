@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Tambah Pengalaman Kerja</h2>
+<mat-dialog-content>
+  <form [formGroup]="experienceFormGroup">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Nama Perusahaan</mat-label>
+      <input matInput formControlName="company" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Jabatan</mat-label>
+      <input matInput formControlName="position" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Lama Bekerja</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date" />
+        <input matEndDate formControlName="end" placeholder="End date" />
+      </mat-date-range-input>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <mat-slide-toggle class="mb-3" formControlName="stillWorking"
+      >Masih bekerja di perusahaan ini</mat-slide-toggle
+    >
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Deskripsi</mat-label>
+      <textarea formControlName="description" matInput></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    color="primary"
+    (click)="submit()"
+    [disabled]="!experienceFormGroup.valid"
+  >
+    Submit
+  </button>
+</mat-dialog-actions>

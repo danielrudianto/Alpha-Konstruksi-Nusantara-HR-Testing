@@ -1,0 +1,16 @@
+<mat-dialog-content>
+  <p>Apakah anda yakin untuk mengunggah jawaban - jawaban ini?</p>
+  <p>Anda tidak dapat mengubah jawaban - jawaban ini setelah mengunggahnya.</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button (click)="close()" mat-button mat-dialog-close>Periksa kembali</button>
+  <button
+    mat-button
+    (click)="submit()"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    Yakin
+  </button>
+</mat-dialog-actions>

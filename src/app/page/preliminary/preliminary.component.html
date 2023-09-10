@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 p-4">
+      <h2>Engineers Test E-201</h2>
+      <p class="mb-4">{{ greetingTyping }}</p>
+      <p class="mb-4">{{ greetingTyping_2 }}</p>
+      <div id="agreement" [ngStyle]="{ opacity: completed ? 1 : 0 }">
+        <form [formGroup]="formGroup" (ngSubmit)="submit()">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Token</mat-label>
+            <input type="text" maxlength="6" matInput formControlName="token" />
+          </mat-form-field>
+
+          <input formControlName="agreement" type="checkbox" />&nbsp;Saya setuju
+          dengan syarat dan ketentuan dari pengujian ini
+
+          <button
+            [disabled]="isSubmitting || !formGroup.valid"
+            type="submit"
+            class="w-100 button mt-3"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

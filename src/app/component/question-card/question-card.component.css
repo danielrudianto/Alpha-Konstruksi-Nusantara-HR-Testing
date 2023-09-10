@@ -1,0 +1,14 @@
+.NgxEditor__Wrapper {
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 5px;
+  min-height: 300px;
+  margin-bottom: 2rem;
+}
+
+p {
+  font-family: "Poppins";
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.25;
+}

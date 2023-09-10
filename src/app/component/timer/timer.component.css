@@ -1,0 +1,23 @@
+.countdown-timer {
+  /* Floating circle on the right bottom */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  /* Size of the circle */
+  width: 75px;
+  height: 75px;
+  /* Background color of the circle */
+  background-color: #fff;
+  /* Border radius of the circle */
+  border-radius: 50%;
+  /* Border of the circle */
+  border: 1px solid #ccc;
+  /* Shadow of the circle */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Text color of the circle */
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

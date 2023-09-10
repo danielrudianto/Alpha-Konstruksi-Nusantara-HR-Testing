@@ -1,0 +1,15 @@
+.type-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.progress {
+  height: 20px;
+  background-color: #e0e0de;
+  border-radius: 5px;
+  width: 100%;
+  margin-left: 5px;
+  margin-right: 5px;
+}

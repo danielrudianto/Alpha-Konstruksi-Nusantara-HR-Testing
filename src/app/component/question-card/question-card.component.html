@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <p>
+        <strong>Pertanyaan #{{ index + 1 }}</strong>
+      </p>
+      <p class="mb-4">{{ data.question }}</p>
+      <div class="NgxEditor__Wrapper" *ngIf="data.type != 'drawing'">
+        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+        </ngx-editor-menu>
+        <ngx-editor [editor]="editor" [(ngModel)]="html"></ngx-editor>
+      </div>
+
+      <input
+        class="form-control mb-3 w-100"
+        type="file"
+        *ngIf="data.type == 'drawing'"
+        accept=".pdf"
+        (change)="onFileChange($event)"
+      />
+
+      <button
+        class="button previous me-3"
+        *ngIf="index > 0"
+        (click)="previousQuestion()"
+      >
+        Previous
+      </button>
+      <button class="button" (click)="nextQuestion()">
+        <span *ngIf="index < length - 1">Next</span>
+        <span *ngIf="index == length - 1">Submit</span>
+      </button>
+    </div>
+  </div>
+</div>
