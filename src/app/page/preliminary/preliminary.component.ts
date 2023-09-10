@@ -38,7 +38,7 @@ export class PreliminaryComponent implements OnInit {
     this.isSubmitting = true;
     // this.router.navigate(['/Information']);
     this.http
-      .post('http://localhost:5000/token/check', {
+      .post('https://api.alphakonstruksi.id/token/check', {
         token: this.formGroup.controls['token'].value,
       })
       .subscribe({

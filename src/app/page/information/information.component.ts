@@ -134,7 +134,7 @@ export class InformationComponent {
     this.isSubmitting = true;
     this.http
       .post(
-        'http://localhost:5000/curriculum',
+        'https://api.alphakonstruksi.id/curriculum',
         {
           name: this.metaFormGroup.controls['name'].value,
           phoneNumber: this.metaFormGroup.controls['phoneNumber'].value,
