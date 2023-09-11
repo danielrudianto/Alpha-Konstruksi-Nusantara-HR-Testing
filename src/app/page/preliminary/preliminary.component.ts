@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -44,10 +44,10 @@ export class PreliminaryComponent implements OnInit {
           token: this.formGroup.controls['token'].value,
         },
         {
-          headers: {
+          headers: new HttpHeaders({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
-          },
+          }),
         }
       )
       .subscribe({

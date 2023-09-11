@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -153,11 +153,11 @@ export class InformationComponent {
           certification: this.certification.value,
         },
         {
-          headers: {
+          headers: new HttpHeaders({
             'Content-Type': 'application/json',
             authorization: `Bearer ${localStorage.getItem('authorization')}`,
             'Access-Control-Allow-Origin': '*',
-          },
+          }),
         }
       )
       .subscribe({

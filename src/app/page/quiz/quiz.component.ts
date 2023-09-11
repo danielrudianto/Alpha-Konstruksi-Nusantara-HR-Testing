@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -35,11 +35,11 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
     this.http
       .get('https://api.alphakonstruksi.id/test', {
-        headers: {
+        headers: new HttpHeaders({
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('authorization'),
           'Access-Control-Allow-Origin': '*',
-        },
+        }),
       })
       .subscribe({
         next: (data: any) => {
@@ -186,11 +186,11 @@ export class QuizComponent implements OnInit {
     this.isLoading = true;
     this.http
       .post('https://api.alphakonstruksi.id/test', result, {
-        headers: {
+        headers: new HttpHeaders({
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('authorization'),
           'Access-Control-Allow-Origin': '*',
-        },
+        }),
       })
       .subscribe({
         next: (data: any) => {
