@@ -6,6 +6,8 @@
       </p>
       <p class="mb-4">{{ data.question }}</p>
       <p class="mb-4">{{ data.notes }}</p>
+
+      <div [innerHtml]="data.attachment" *ngIf="data.attachment != null"></div>
       <div class="NgxEditor__Wrapper" *ngIf="data.type != 'drawing'">
         <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
         </ngx-editor-menu>

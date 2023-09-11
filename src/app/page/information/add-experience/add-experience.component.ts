@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -7,7 +7,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   templateUrl: './add-experience.component.html',
   styleUrls: ['./add-experience.component.css'],
 })
-export class AddExperienceComponent {
+export class AddExperienceComponent implements OnInit {
+  maxDate: Date = new Date();
   constructor(private dialog: MatDialogRef<AddExperienceComponent>) {}
 
   experienceFormGroup: FormGroup = new FormGroup({
@@ -21,5 +22,25 @@ export class AddExperienceComponent {
 
   submit() {
     this.dialog.close(this.experienceFormGroup.value);
+  }
+
+  ngOnInit(): void {
+    this.experienceFormGroup.controls['stillWorking'].valueChanges.subscribe({
+      next: (data) => {
+        if (data) {
+          // If the user is still working, disable the end date
+          this.experienceFormGroup.controls['end'].setValue('');
+          // Remove the required validator
+          this.experienceFormGroup.controls['end'].clearValidators();
+          this.experienceFormGroup.controls['end'].disable();
+        } else {
+          // If the user is not working anymore, enable the end date
+          this.experienceFormGroup.controls['end'].setValidators(
+            Validators.required
+          );
+          this.experienceFormGroup.controls['end'].enable();
+        }
+      },
+    });
   }
 }

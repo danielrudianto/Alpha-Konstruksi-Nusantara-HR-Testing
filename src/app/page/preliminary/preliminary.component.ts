@@ -90,7 +90,7 @@ export class PreliminaryComponent implements OnInit {
   }
 
   typeGreeting() {
-    let speed = 15;
+    let speed = 2;
     let totalTimeElapsed = 0;
     for (let i = 0; i < this.greetings.length; i++) {
       if (i == this.greetings.length - 1) {
@@ -116,7 +116,7 @@ export class PreliminaryComponent implements OnInit {
   }
 
   typeSecondGreeting() {
-    let speed = 15;
+    let speed = 2;
     let totalTimeElapsed = 0;
     for (let i = 0; i < this.greetings_2.length; i++) {
       if (i == this.greetings_2.length - 1) {

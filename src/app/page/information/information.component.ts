@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,13 +12,24 @@ import { AddExperienceComponent } from './add-experience/add-experience.componen
   templateUrl: './information.component.html',
   styleUrls: ['./information.component.css'],
 })
-export class InformationComponent {
+export class InformationComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private http: HttpClient,
     private snackBar: MatSnackBar
   ) {}
+
+  maxDate: Date = new Date();
+  minDate: Date = new Date();
+
+  ngOnInit(): void {
+    // Maximum date is 18 years ago
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    // Minimum date is 50 years ago
+    this.minDate.setFullYear(this.minDate.getFullYear() - 50);
+  }
+
   isSubmitting: boolean = false;
   openAddExperience() {
     const dialog = this.dialog.open(AddExperienceComponent, {
@@ -36,7 +47,7 @@ export class InformationComponent {
             company: new FormControl(data.company, Validators.required),
             position: new FormControl(data.position, Validators.required),
             start: new FormControl(data.start, Validators.required),
-            end: new FormControl(data.end, Validators.required),
+            end: new FormControl(data.end),
             description: new FormControl(data.description, Validators.required),
             stillWorking: new FormControl(data.stillWorking),
           })
@@ -70,15 +81,18 @@ export class InformationComponent {
 
   metaFormGroup: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
+    nickName: new FormControl('', Validators.required),
     phoneNumber: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     address: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
     dateOfBirth: new FormControl('', Validators.required),
   });
 
   educationFormGroup: FormGroup = new FormGroup({
     school: new FormControl('', Validators.required),
     major: new FormControl('', Validators.required),
+    minor: new FormControl(''),
     entry: new FormControl('', [
       Validators.required,
       Validators.max(new Date().getFullYear()),
@@ -137,13 +151,16 @@ export class InformationComponent {
         'https://api.alphakonstruksi.id/curriculum',
         {
           name: this.metaFormGroup.controls['name'].value,
+          nickName: this.metaFormGroup.controls['nickName'].value,
           phoneNumber: this.metaFormGroup.controls['phoneNumber'].value,
           email: this.metaFormGroup.controls['email'].value,
           address: this.metaFormGroup.controls['address'].value,
+          city: this.metaFormGroup.controls['city'].value,
           dateOfBirth: this.metaFormGroup.controls['dateOfBirth'].value,
           education: {
             school: this.educationFormGroup.controls['school'].value,
             major: this.educationFormGroup.controls['major'].value,
+            minor: this.educationFormGroup.controls['minor'].value,
             entry: this.educationFormGroup.controls['entry'].value,
             graduate: this.educationFormGroup.controls['graduation'].value,
             gpa: this.educationFormGroup.controls['gpa'].value,

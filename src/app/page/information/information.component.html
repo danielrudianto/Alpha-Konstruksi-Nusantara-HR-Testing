@@ -11,6 +11,11 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nama Panggilan</mat-label>
+            <input type="text" matInput formControlName="nickName" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
             <mat-label>Nomor telepon</mat-label>
             <input type="tel" matInput formControlName="phoneNumber" />
           </mat-form-field>
@@ -26,6 +31,11 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Kota</mat-label>
+            <input type="text" matInput formControlName="city" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
             <mat-label>Tanggal lahir</mat-label>
             <input
               type="text"
@@ -33,6 +43,8 @@
               (click)="picker.open()"
               matInput
               [matDatepicker]="picker"
+              [max]="maxDate"
+              [min]="minDate"
               formControlName="dateOfBirth"
             />
             <mat-datepicker-toggle
@@ -50,11 +62,28 @@
           <mat-divider class="mb-3"></mat-divider>
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Nama Perguruan Tinggi</mat-label>
-            <input matInput formControlName="school" />
+            <input
+              matInput
+              formControlName="school"
+              placeholder="Ex. Universitas Trisakti"
+            />
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Jurusan</mat-label>
-            <input matInput formControlName="major" />
+            <input
+              matInput
+              formControlName="major"
+              placeholder="Ex. Teknik Sipil"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Bidang Konsentrasi</mat-label>
+            <input
+              matInput
+              formControlName="minor"
+              placeholder="Ex. Geoteknik"
+            />
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="me-3">
@@ -157,6 +186,7 @@
         [disabled]="
           !educationFormGroup.valid ||
           !informationFormGroup.valid ||
+          !metaFormGroup.valid ||
           isSubmitting
         "
         (click)="submit()"
