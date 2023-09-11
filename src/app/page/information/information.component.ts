@@ -156,6 +156,7 @@ export class InformationComponent {
           headers: {
             'Content-Type': 'application/json',
             authorization: `Bearer ${localStorage.getItem('authorization')}`,
+            'Access-Control-Allow-Origin': '*',
           },
         }
       )

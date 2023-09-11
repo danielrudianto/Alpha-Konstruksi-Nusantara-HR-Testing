@@ -38,9 +38,18 @@ export class PreliminaryComponent implements OnInit {
     this.isSubmitting = true;
     // this.router.navigate(['/Information']);
     this.http
-      .post('https://api.alphakonstruksi.id/token/check', {
-        token: this.formGroup.controls['token'].value,
-      })
+      .post(
+        'https://api.alphakonstruksi.id/token/check',
+        {
+          token: this.formGroup.controls['token'].value,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
+      )
       .subscribe({
         next: (data: any) => {
           const authorization = data.token;

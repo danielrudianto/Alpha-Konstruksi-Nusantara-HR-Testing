@@ -38,6 +38,7 @@ export class QuizComponent implements OnInit {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('authorization'),
+          'Access-Control-Allow-Origin': '*',
         },
       })
       .subscribe({
@@ -188,6 +189,7 @@ export class QuizComponent implements OnInit {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('authorization'),
+          'Access-Control-Allow-Origin': '*',
         },
       })
       .subscribe({
