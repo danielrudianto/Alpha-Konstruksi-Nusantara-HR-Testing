@@ -65,12 +65,11 @@ export class QuizComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.log(error);
-          // this.snackBar.open(error.error.message, 'Tutup', {
-          //   duration: 1000,
-          // });
+          this.snackBar.open(error.error.message, 'Tutup', {
+            duration: 1000,
+          });
 
-          // this.router.navigate(['/']);
+          this.router.navigate(['/']);
         },
       });
     this.questionsLength[0] = this.questions.filter(
