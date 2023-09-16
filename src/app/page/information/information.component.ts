@@ -44,7 +44,7 @@ export class InformationComponent implements OnInit {
     this.isSubmitting = true;
     this.http
       .post(
-        'http://localhost:5000/curriculum',
+        'https://api.alphakonstruksi.id/curriculum',
         {
           name: this.metaFormGroup.controls['name'].value,
           nickName: this.metaFormGroup.controls['nickName'].value,

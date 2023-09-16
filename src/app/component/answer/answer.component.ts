@@ -42,7 +42,7 @@ export class AnswerComponent implements OnInit {
     this.formGroup.disable();
     this.http
       .post(
-        'http://localhost:5000/test',
+        'https://api.alphakonstruksi.id/test',
         {
           questionID: this.data.id,
           answer: this.formGroup.controls['answer'].value,

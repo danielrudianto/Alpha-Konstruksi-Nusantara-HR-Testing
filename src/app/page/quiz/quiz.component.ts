@@ -35,7 +35,7 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get('http://localhost:5000/test', {
+      .get('https://api.alphakonstruksi.id/test', {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           authorization: `Bearer ${localStorage.getItem('authorization')}`,
@@ -118,7 +118,7 @@ export class QuizComponent implements OnInit {
   submit() {
     this.http
       .post(
-        'http://localhost:5000/test/end',
+        'https://api.alphakonstruksi.id/test/end',
         {},
         {
           headers: new HttpHeaders({
