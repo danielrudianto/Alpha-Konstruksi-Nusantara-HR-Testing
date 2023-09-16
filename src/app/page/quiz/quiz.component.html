@@ -1,31 +1,44 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <mat-spinner *ngIf="isLoading"></mat-spinner>
-      <div class="question-wrapper" *ngIf="!isLoading">
-        <div class="question-card">
-          <app-question-type
-            [types]="questionTypes"
-            [length]="questionsLength"
-            [index]="
-              questions[index].type == 'civil'
-                ? 0
-                : questions[index].type == 'geo'
-                ? 1
-                : 2
-            "
-          ></app-question-type>
-          <app-question-card
-            [data]="questions[index]"
-            [index]="index"
-            [length]="questions.length"
-            (next)="onNextQuestion($event)"
-            (previous)="onPreviousQuestion($event)"
-          />
-        </div>
+    <div class="col-12" style="margin-bottom: 120px">
+      <h2 id="motto-text">Test</h2>
+      <div class="progress-bar">
+        <div class="bar" [style.width]="progress"></div>
       </div>
+      <mat-card
+        *ngFor="let question of questions; index as i"
+        class="mb-2"
+        (click)="openQuestion(i)"
+      >
+        <mat-card-content>
+          <p>{{ question.question }}</p>
+          <div class="tag">
+            <div class="type-chip">
+              {{
+                question.type == "civil"
+                  ? "Civil Engineering"
+                  : question.type == "geo"
+                  ? "Geotechnical Engineering"
+                  : "Drawing"
+              }}
+            </div>
+
+            <div
+              class="status-chip"
+              [class.submitted]="question.answer != null"
+            >
+              <span *ngIf="question.answer != null">&#x2713;</span
+              >{{ question.answer != null ? "Submitted" : "Not submitted" }}
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>
 
-<app-timer [end]="endTime" *ngIf="endTime != null"></app-timer>
+<app-timer
+  [end]="endTime"
+  *ngIf="endTime != null"
+  (onSubmit)="openConfirmation()"
+></app-timer>

@@ -1,15 +1,65 @@
-p {
+#department-text {
   font-family: "Poppins";
-  font-size: 1.15rem;
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+#company-text {
+  font-family: "Poppins";
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: black;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+p,
+li {
+  font-family: "Poppins";
+  font-size: 1.2rem;
+  color: black;
+  margin-top: 1rem;
   line-height: 1.5;
 }
 
-#agreement {
+#hero-image {
+  width: 100%;
+  height: auto;
+  border-bottom-left-radius: 50%;
+}
+
+#asset-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+button {
+  background-color: #bd925c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
   font-family: "Poppins";
-  font-size: 1.15rem;
-  font-weight: 400;
-  line-height: 1.5;
-  opacity: 0;
+  font-size: 1.2rem;
+  transition: 0.3s all ease;
+}
+
+button:hover {
+  background-color: #a37b3b;
+}
+
+button:disabled {
+  background-color: #d4d4d4;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-family: "Poppins";
+  font-size: 1.2rem;
   transition: 0.3s all ease;
 }

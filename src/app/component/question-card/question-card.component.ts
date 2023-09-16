@@ -8,7 +8,6 @@ import {
   Output,
 } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-question-card',
@@ -25,14 +24,6 @@ export class QuestionCardComponent implements OnInit, OnDestroy, OnChanges {
   @Output() next: EventEmitter<any> = new EventEmitter();
   @Output() previous: EventEmitter<any> = new EventEmitter();
 
-  editor: Editor = new Editor();
-  toolbar: Toolbar = [
-    ['bold', 'italic'],
-    ['ordered_list', 'bullet_list'],
-    ['link', 'image'],
-    ['align_left', 'align_center', 'align_right', 'align_justify'],
-    ['horizontal_rule', 'format_clear'],
-  ];
   html: any;
 
   nextQuestion() {
@@ -43,22 +34,11 @@ export class QuestionCardComponent implements OnInit, OnDestroy, OnChanges {
     this.previous.emit(this.html);
   }
 
-  ngOnInit(): void {
-    this.editor = new Editor({
-      content: '',
-      history: true,
-      keyboardShortcuts: true,
-    });
-  }
+  ngOnInit(): void {}
 
-  ngOnDestroy(): void {
-    this.editor.destroy();
-  }
+  ngOnDestroy(): void {}
 
-  ngOnChanges(): void {
-    this.editor.setContent(this.data.answer);
-    this.html = this.data.answer;
-  }
+  ngOnChanges(): void {}
 
   onFileChange(event: any) {
     const reader = new FileReader();

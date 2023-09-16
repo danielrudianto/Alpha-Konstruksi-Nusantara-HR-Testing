@@ -1,4 +1,8 @@
-<div class="countdown-timer">
+<div class="countdown-timer" [class.near]="isNearEnd">
   <span class="timer">{{ minutes | time }}</span
   >: <span class="timer">{{ seconds | time }}</span>
+</div>
+
+<div class="bottom-nav" (click)="submit()">
+  <button>End Test</button>
 </div>

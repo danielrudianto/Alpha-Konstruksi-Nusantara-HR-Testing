@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { toHTML } from 'ngx-editor';
+import { AnswerComponent } from 'src/app/component/answer/answer.component';
 import { ConfirmationDialogComponent } from 'src/app/component/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -23,21 +24,21 @@ export class QuizComponent implements OnInit {
     'Geotechnical Engineering',
     'Drawing',
   ];
-  questionsLength: number[] = [0, 0, 0];
 
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sheet: MatBottomSheet
   ) {}
 
   ngOnInit(): void {
     this.http
-      .get('https://api.alphakonstruksi.id/test', {
+      .get('http://localhost:5000/test', {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('authorization'),
+          authorization: `Bearer ${localStorage.getItem('authorization')}`,
           'Access-Control-Allow-Origin': '*',
         }),
       })
@@ -72,126 +73,61 @@ export class QuizComponent implements OnInit {
           this.router.navigate(['/']);
         },
       });
-    this.questionsLength[0] = this.questions.filter(
-      (question) => question.type == 'civil'
-    ).length;
-    this.questionsLength[1] = this.questions.filter(
-      (question) => question.type == 'geo'
-    ).length;
-    this.questionsLength[2] = this.questions.filter(
-      (question) => question.type == 'drawing'
-    ).length;
   }
 
-  onNextQuestion(event: any) {
-    const currentTime = new Date();
-    const offset = currentTime.getTimezoneOffset() / 60;
-    currentTime.setMinutes(currentTime.getMinutes() + offset);
+  get progress() {
+    const pending = this.questions.filter(
+      (question) => question.answer == null
+    );
 
-    // If already expired, redirect to home page
-    if (
-      this.endTime != null &&
-      this.endTime.getTime() < currentTime.getTime()
-    ) {
-      this.snackBar.open(
-        'Waktu ujian telah habis. Terima kasih atas waktunya.',
-        'Tutup',
-        {
-          duration: 1000,
-        }
-      );
-    }
-
-    if (this.index == this.questions.length - 1) {
-      this.questions[this.index].answer = event == undefined ? null : event;
-      const dialog = this.dialog.open(ConfirmationDialogComponent, {
-        minWidth: '300px',
-      });
-
-      dialog.afterClosed().subscribe((result) => {
-        if (result) {
-          this.submit();
-        }
-      });
-    } else {
-      this.questions[this.index].answer = event;
-      this.index++;
-    }
+    return (
+      ((this.questions.length - pending.length) / this.questions.length) * 100 +
+      '%'
+    );
   }
 
-  onPreviousQuestion(event: any) {
-    const currentTime = new Date();
-    const offset = currentTime.getTimezoneOffset() / 60;
-    currentTime.setMinutes(currentTime.getMinutes() + offset);
+  openQuestion(index: number) {
+    const sheet = this.sheet.open(AnswerComponent, {
+      data: {
+        id: this.questions[index].id,
+        question: this.questions[index].question,
+        attachment: this.questions[index].attachment,
+        notes: this.questions[index].notes,
+        answer: this.questions[index].answer,
+        type: this.questions[index].type,
+      },
+    });
 
-    // If already expired, redirect to home page
-    if (
-      this.endTime != null &&
-      this.endTime.getTime() < currentTime.getTime()
-    ) {
-      this.snackBar.open(
-        'Waktu ujian telah habis. Terima kasih atas waktunya.',
-        'Tutup',
-        {
-          duration: 1000,
-        }
-      );
-    }
+    sheet.afterDismissed().subscribe((data) => {
+      if (data) {
+        this.questions[index].answer = data;
+      }
+    });
+  }
 
-    this.questions[this.index].answer = event;
-    if (this.index == 0) {
-      return;
-    } else {
-      this.index--;
-    }
+  openConfirmation() {
+    const dialog = this.dialog.open(ConfirmationDialogComponent);
+    dialog.afterClosed().subscribe((result) => {
+      console.log(result);
+      if (result) {
+        this.submit();
+      }
+    });
   }
 
   submit() {
-    const currentTime = new Date();
-    const offset = currentTime.getTimezoneOffset() / 60;
-    currentTime.setMinutes(currentTime.getMinutes() + offset);
-
-    // If already expired, redirect to home page
-    if (
-      this.endTime != null &&
-      this.endTime.getTime() < currentTime.getTime()
-    ) {
-      this.snackBar.open(
-        'Waktu ujian telah habis. Terima kasih atas waktunya.',
-        'Tutup',
-        {
-          duration: 1000,
-        }
-      );
-    }
-
-    const result = [];
-    for (let i = 0; i < this.questions.length; i++) {
-      if (this.questions[i].type == 'drawing') {
-        result.push({
-          question: this.questions[i].id,
-          answer: this.questions[i].answer,
-        });
-      } else {
-        result.push({
-          question: this.questions[i].id,
-          answer:
-            this.questions[i].answer == '' || this.questions[i].answer == null
-              ? null
-              : toHTML(this.questions[i].answer),
-        });
-      }
-    }
-
-    this.isLoading = true;
     this.http
-      .post('https://api.alphakonstruksi.id/test', result, {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('authorization'),
-          'Access-Control-Allow-Origin': '*',
-        }),
-      })
+      .post(
+        'http://localhost:5000/test/end',
+        {},
+        {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('authorization'),
+            'Access-Control-Allow-Origin': '*',
+          }),
+        }
+      )
       .subscribe({
         next: (data: any) => {
           this.isLoading = false;
@@ -203,7 +139,7 @@ export class QuizComponent implements OnInit {
             }
           );
 
-          this.router.navigate(['/']);
+          this.router.navigate(['/Success']);
         },
       });
   }

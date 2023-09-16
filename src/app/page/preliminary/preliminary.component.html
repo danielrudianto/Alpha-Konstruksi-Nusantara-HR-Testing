@@ -1,25 +1,89 @@
+<nav></nav>
 <div class="container">
   <div class="row">
-    <div class="col-12 p-4">
-      <h2>Engineers Test E-201</h2>
-      <p class="mb-4">{{ greetingTyping }}</p>
-      <p class="mb-4">{{ greetingTyping_2 }}</p>
-      <div id="agreement" [ngStyle]="{ opacity: completed ? 1 : 0 }">
-        <form [formGroup]="formGroup" (ngSubmit)="submit()">
-          <mat-form-field appearance="outline" class="w-100">
+    <div
+      class="col-xl-8 col-lg-6 col-md-10 col-sm-10 col-12"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+    >
+      <h2 id="motto-text">
+        We believe in<br />
+        <span>Dedication</span>, <span>Hard Work</span>,<br />
+        and <span>Consistency</span>.
+      </h2>
+      <h1 id="department-text">Human Resource Department</h1>
+      <h1 id="company-text">PT Alpha Konstruksi Nusantara</h1>
+      <p>
+        Hai, selamat datang di test online Engineer di PT Alpha Konstruksi
+        Nusantara. PT Alpha Konstruksi Nusantara merupakan sebuah perusahan
+        kontraktor berlokasi di Bekasi, Indonesia dengan spesialisasi dalam
+        bidang geoteknik dan subspesialis fondasi pengeboran (bored piles).
+        Dalam lebih dari 10 tahun pengalamannya, PT Alpha Konstruksi Nusantara
+        telah berhasil menyelesaikan beragam proyek di beragam daerah di
+        Nusantara.
+      </p>
+    </div>
+    <div
+      class="col-xl-4 col-lg-6 col-md-6 d-lg-block d-none"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+    >
+      <img
+        src="/assets/images/hero-image.png"
+        alt="Drilling rig at one of PT Alpha Konstruksi Nusantara project"
+        id="hero-image"
+      />
+    </div>
+    <div class="row mt-3">
+      <div
+        class="col-xl-4 col-lg-6 col-md-6 d-lg-block d-none"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        data-aos-delay="500"
+      >
+        <img src="/assets/images/asset.png" alt="Asset" id="asset-image" />
+      </div>
+      <div
+        class="col-xl-8 col-lg-6 col-md-10 col-sm-10 col-12 mb-3"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        data-aos-delay="500"
+      >
+        <p>
+          Test akan dilaksanakan dengan durasi 60 menit. Selama masa pengerjaan,
+          peserta diperbolehkan untuk mencari atau menelusuri jawaban via mesin
+          pencarian (search engine), namun setiap jawaban yang terdeteksi
+          melakukan plagiarisme akan dianggap gagal.
+        </p>
+
+        <p>Sebelum memulai, mohon lakukan persiapan sebagai berikut:</p>
+        <ul>
+          <li>
+            Mohon isikan biodata sesuai instruksi dalam ujian. Isi dengan data
+            data yang sebenar-benarnya.
+          </li>
+          <li>
+            Mohon siapkan device untuk membuat gambar dalam format
+            <b>CAD</b> dan <b>PDF</b>.
+          </li>
+          <li>
+            Pastikan bapak / ibu memiliki koneksi internet yang baik dan stabil.
+          </li>
+        </ul>
+
+        <p>
+          Apabila anda sudah siap, isikan nomor token yang telah diberikan
+          kepada anda disini.
+        </p>
+
+        <form [formGroup]="formGroup" (submit)="submit()">
+          <mat-form-field class="w-100" appearance="outline">
             <mat-label>Token</mat-label>
-            <input type="text" maxlength="6" matInput formControlName="token" />
+            <input matInput formControlName="token" />
           </mat-form-field>
 
-          <input formControlName="agreement" type="checkbox" />&nbsp;Saya setuju
-          dengan syarat dan ketentuan dari pengujian ini
-
-          <button
-            [disabled]="isSubmitting || !formGroup.valid"
-            type="submit"
-            class="w-100 button mt-3"
-          >
-            Submit
+          <button class="w-100" [disabled]="!formGroup.valid || isSubmitting">
+            Start
           </button>
         </form>
       </div>

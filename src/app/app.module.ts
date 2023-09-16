@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { NgxEditorModule } from 'ngx-editor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { QuestionCardComponent } from './component/question-card/question-card.component';
@@ -23,16 +22,18 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 import { MatNativeDateModule } from '@angular/material/core';
 import { TimerComponent } from './component/timer/timer.component';
-import { QuestionTypeComponent } from './component/question-type/question-type.component';
 import { InformationComponent } from './page/information/information.component';
-import { AddExperienceComponent } from './page/information/add-experience/add-experience.component';
-import { AddCertificationComponent } from './page/information/add-certification/add-certification.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 import { TimePipe } from './pipes/time.pipe';
+import { AnswerComponent } from './component/answer/answer.component';
+import { SafePipe } from './pipes/safe.pipe';
+import { SuccessPageComponent } from './page/success-page/success-page.component';
 
 @NgModule({
   declarations: [
@@ -41,17 +42,16 @@ import { TimePipe } from './pipes/time.pipe';
     PreliminaryComponent,
     QuizComponent,
     TimerComponent,
-    QuestionTypeComponent,
     InformationComponent,
-    AddExperienceComponent,
-    AddCertificationComponent,
     ConfirmationDialogComponent,
     TimePipe,
+    SafePipe,
+    AnswerComponent,
+    SuccessPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxEditorModule,
     BrowserAnimationsModule,
     NgbModule,
     MatInputModule,
@@ -69,6 +69,8 @@ import { TimePipe } from './pipes/time.pipe';
     MatSnackBarModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatBottomSheetModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

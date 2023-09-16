@@ -1,198 +1,87 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h1>Informasi</h1>
-      <p>Mohon isikan curriculum vitae anda ke dalam format sebagai berikut.</p>
-      <section>
-        <form [formGroup]="metaFormGroup">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Nama</mat-label>
-            <input type="text" matInput formControlName="name" />
-          </mat-form-field>
+<div class="background-shape"></div>
+<form [formGroup]="metaFormGroup">
+  <div class="container" data-aos="flip-up">
+    <div class="row">
+      <div class="col-lg-9 col-md-8 col-12">
+        <div class="d-flex h-100 flex-column">
+          <div style="flex-grow: 1">
+            <h2 id="motto-text">Information</h2>
+            <p>
+              Mohon isikan curriculum vitae anda ke dalam format sebagai
+              berikut.
+            </p>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nama</mat-label>
+              <input type="text" matInput formControlName="name" />
+            </mat-form-field>
 
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Nama Panggilan</mat-label>
-            <input type="text" matInput formControlName="nickName" />
-          </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Alamat</mat-label>
+              <textarea matInput formControlName="address"></textarea>
+            </mat-form-field>
 
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Nomor telepon</mat-label>
-            <input type="tel" matInput formControlName="phoneNumber" />
-          </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Kota</mat-label>
+              <input type="text" matInput formControlName="city" />
+            </mat-form-field>
 
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Email</mat-label>
-            <input type="email" matInput formControlName="email" />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Alamat</mat-label>
-            <textarea matInput formControlName="address"></textarea>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Kota</mat-label>
-            <input type="text" matInput formControlName="city" />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Tanggal lahir</mat-label>
-            <input
-              type="text"
-              readonly
-              (click)="picker.open()"
-              matInput
-              [matDatepicker]="picker"
-              [max]="maxDate"
-              [min]="minDate"
-              formControlName="dateOfBirth"
-            />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </form>
-      </section>
-
-      <section>
-        <form [formGroup]="educationFormGroup">
-          <h3>Pendidikan terakhir</h3>
-          <mat-divider class="mb-3"></mat-divider>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Nama Perguruan Tinggi</mat-label>
-            <input
-              matInput
-              formControlName="school"
-              placeholder="Ex. Universitas Trisakti"
-            />
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Jurusan</mat-label>
-            <input
-              matInput
-              formControlName="major"
-              placeholder="Ex. Teknik Sipil"
-            />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Bidang Konsentrasi</mat-label>
-            <input
-              matInput
-              formControlName="minor"
-              placeholder="Ex. Geoteknik"
-            />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="me-3">
-            <mat-label>Tahun Masuk</mat-label>
-            <input matInput formControlName="entry" />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Tahun Lulus</mat-label>
-            <input matInput formControlName="graduation" />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>IPK</mat-label>
-            <input matInput formControlName="gpa" />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Judul Skripsi</mat-label>
-            <input matInput formControlName="thesis" />
-          </mat-form-field>
-        </form>
-      </section>
-
-      <section>
-        <h3>Pengalaman Kerja</h3>
-        <mat-divider class="mb-3"></mat-divider>
-
-        <button mat-raised-button color="primary" (click)="openAddExperience()">
-          Tambah pengalaman kerja
-        </button>
-        <p class="mt-3" *ngIf="experience.length == 0">
-          Belum ada pengalaman kerja.
-        </p>
-
-        <div class="mt-3">
-          <div
-            class="exp-wrapper"
-            *ngFor="let exp of experience.controls; index as i"
-          >
-            <button mat-icon-button (click)="deleteExperience(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <div class="exp-text">
-              <h3 class="mb-0">
-                {{ exp.get("company")!.value }} -
-                {{ exp.get("position")!.value }}
-              </h3>
-              <small
-                >{{ exp.get("start")!.value | date : "dd MMMM YY" }} -
-                {{
-                  exp.get("stillWorking")!.value
-                    ? "sekarang"
-                    : (exp.get("end")!.value | date : "dd MMMM YY")
-                }}</small
-              >
-              <p>{{ exp.get("description")!.value }}</p>
-            </div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Tanggal lahir</mat-label>
+              <input
+                type="text"
+                readonly
+                (click)="picker.open()"
+                matInput
+                [matDatepicker]="picker"
+                [max]="maxDate"
+                [min]="minDate"
+                formControlName="dateOfBirth"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
           </div>
         </div>
-        <mat-divider class="mt-3 mb-3"></mat-divider>
-      </section>
-      <section>
-        <h3>Sertifikasi</h3>
-        <mat-divider class="mb-3"></mat-divider>
+      </div>
+      <div class="col-lg-3 col-md-4 col-12">
+        <div class="d-flex h-100 flex-column">
+          <img
+            src="/assets/images/information.png"
+            class="d-md-block d-none"
+            alt="information"
+          />
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nama Panggilan</mat-label>
+              <input type="text" matInput formControlName="nickName" />
+            </mat-form-field>
 
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nomor telepon dengan whatsapp</mat-label>
+              <input type="tel" matInput formControlName="phoneNumber" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput formControlName="email" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
         <button
-          mat-raised-button
-          color="primary"
-          (click)="openAddCertification()"
+          class="button"
+          [disabled]="!metaFormGroup.valid || isSubmitting"
+          (click)="submit()"
         >
-          Tambah sertifikasi
+          Submit
         </button>
-
-        <p class="mt-3" *ngIf="certification.length == 0">
-          Belum ada sertifikasi.
-        </p>
-
-        <div class="mt-3">
-          <div
-            class="exp-wrapper"
-            *ngFor="let exp of certification.controls; index as i"
-          >
-            <button mat-icon-button (click)="deleteExperience(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <div class="exp-text">
-              <h3 class="mb-0">
-                {{ exp.get("name")!.value }} - {{ exp.get("issuer")!.value }}
-              </h3>
-              <small>{{ exp.get("year")!.value }}</small>
-              <p>{{ exp.get("description")!.value }}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <button
-        class="button"
-        [disabled]="
-          !educationFormGroup.valid ||
-          !informationFormGroup.valid ||
-          !metaFormGroup.valid ||
-          isSubmitting
-        "
-        (click)="submit()"
-      >
-        Submit
-      </button>
+      </div>
     </div>
   </div>
-</div>
+</form>

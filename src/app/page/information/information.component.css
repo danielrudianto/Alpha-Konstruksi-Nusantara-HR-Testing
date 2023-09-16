@@ -1,26 +1,47 @@
-p {
-  font-family: "Poppins";
-  font-size: 1.15rem;
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-h3 {
-  font-family: "Poppins";
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-h1 {
-  font-family: "Poppins";
-  font-size: 2.25rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.exp-wrapper {
-  display: flex;
-  flex-direction: row;
+.background-shape {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 50%;
+  /* Background gradient from left to right */
+  background: linear-gradient(
+    90deg,
+    rgba(153, 101, 37, 1) 15%,
+    rgba(189, 146, 92, 1) 100%
+  );
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 50%);
+}
+
+.container {
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1rem;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  /* Give a little shadow to the container */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+img {
+  flex-grow: 1;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 720px) {
+  img {
+    display: none;
+  }
+}
+
+#motto-text {
+  font-family: "Poppins";
+  font-size: 3rem;
+  font-weight: 800;
+  color: black;
+  margin-top: 1rem;
+  line-height: 1;
 }

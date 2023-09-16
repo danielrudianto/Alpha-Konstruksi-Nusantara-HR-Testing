@@ -8,11 +8,10 @@
       <p class="mb-4">{{ data.notes }}</p>
 
       <div [innerHtml]="data.attachment" *ngIf="data.attachment != null"></div>
-      <div class="NgxEditor__Wrapper" *ngIf="data.type != 'drawing'">
-        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
-        </ngx-editor-menu>
-        <ngx-editor [editor]="editor" [(ngModel)]="html"></ngx-editor>
-      </div>
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Answer</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
 
       <input
         class="form-control mb-3 w-100"
