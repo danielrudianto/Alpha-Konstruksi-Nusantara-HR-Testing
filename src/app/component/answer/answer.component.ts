@@ -12,6 +12,7 @@ import {
   MAT_BOTTOM_SHEET_DATA,
 } from '@angular/material/bottom-sheet';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-answer',
@@ -24,7 +25,8 @@ export class AnswerComponent implements OnInit {
     private sheet: MatBottomSheetRef<AnswerComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private http: HttpClient,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   formGroup: FormGroup = new FormGroup({
@@ -62,6 +64,19 @@ export class AnswerComponent implements OnInit {
           this.sheet.dismiss(this.formGroup.controls['answer'].value);
         },
         error: (error) => {
+          if (error.status == 401) {
+            localStorage.removeItem('authorization');
+            this.snackBar.open(
+              'Mohon maaf token anda tidak valid. Silahkan coba lagi.',
+              'Tutup',
+              {
+                duration: 1000,
+              }
+            );
+            this.sheet.dismiss();
+            this.router.navigate(['/']);
+            return;
+          }
           this.isSubmitting = false;
           this.formGroup.enable();
 

@@ -45,3 +45,22 @@ img {
   margin-top: 1rem;
   line-height: 1;
 }
+
+button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #bd925c;
+  color: black;
+}
+
+button:disabled {
+  background-color: #ccc;
+  color: #666;
+}

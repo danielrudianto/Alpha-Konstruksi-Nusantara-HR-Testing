@@ -129,7 +129,8 @@ export class QuizComponent implements OnInit {
         }
       )
       .subscribe({
-        next: (data: any) => {
+        next: (_) => {
+          localStorage.removeItem('authorization');
           this.isLoading = false;
           this.snackBar.open(
             'Berhasil mengisi jawaban ujian. Terima kasih atas waktunya.',
