@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AnswerComponent } from 'src/app/component/answer/answer.component';
 import { ConfirmationDialogComponent } from 'src/app/component/confirmation-dialog/confirmation-dialog.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-quiz',
@@ -35,7 +36,7 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get('https://api.alphakonstruksi.id/test', {
+      .get(`${environment.apiURL}test`, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           authorization: `Bearer ${localStorage.getItem('authorization')}`,
@@ -118,7 +119,7 @@ export class QuizComponent implements OnInit {
   submit() {
     this.http
       .post(
-        'https://api.alphakonstruksi.id/test/end',
+        `${environment.apiURL}test/end`,
         {},
         {
           headers: new HttpHeaders({
@@ -141,6 +142,9 @@ export class QuizComponent implements OnInit {
           );
 
           this.router.navigate(['/Success']);
+        },
+        error: (error) => {
+          console.log(error);
         },
       });
   }

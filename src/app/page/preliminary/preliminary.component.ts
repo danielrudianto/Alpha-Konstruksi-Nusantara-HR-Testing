@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as Aos from 'aos';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-preliminary',
@@ -28,7 +29,7 @@ export class PreliminaryComponent implements OnInit {
     // this.router.navigate(['/Information']);
     this.http
       .post(
-        'https://api.alphakonstruksi.id/token/check',
+        `${environment.apiURL}token/check`,
         {
           token: this.formGroup.controls['token'].value,
         },

@@ -13,6 +13,7 @@ import {
 } from '@angular/material/bottom-sheet';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-answer',
@@ -44,7 +45,7 @@ export class AnswerComponent implements OnInit {
     this.formGroup.disable();
     this.http
       .post(
-        'https://api.alphakonstruksi.id/test',
+        `${environment.apiURL}test`,
         {
           questionID: this.data.id,
           answer: this.formGroup.controls['answer'].value,

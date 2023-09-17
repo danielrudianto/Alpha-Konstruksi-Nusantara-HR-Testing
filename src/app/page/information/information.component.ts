@@ -4,6 +4,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-information',
@@ -44,7 +45,7 @@ export class InformationComponent implements OnInit {
     this.isSubmitting = true;
     this.http
       .post(
-        'https://api.alphakonstruksi.id/curriculum',
+        `${environment.apiURL}curriculum`,
         {
           name: this.metaFormGroup.controls['name'].value,
           nickName: this.metaFormGroup.controls['nickName'].value,
