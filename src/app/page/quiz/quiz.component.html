@@ -25,10 +25,17 @@
 
             <div
               class="status-chip"
-              [class.submitted]="question.answer != null"
+              [class.submitted]="
+                question.answer != null || question.files.length > 0
+              "
             >
-              <span *ngIf="question.answer != null">&#x2713;</span
-              >{{ question.answer != null ? "Submitted" : "Not submitted" }}
+              <span *ngIf="question.answer != null || question.files.length > 0"
+                >&#x2713;</span
+              >{{
+                question.answer != null || question.files.length > 0
+                  ? "Submitted"
+                  : "Not submitted"
+              }}
             </div>
           </div>
         </mat-card-content>

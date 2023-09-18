@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   Component,
+  ElementRef,
   Inject,
   OnInit,
+  ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   MatBottomSheetRef,
   MAT_BOTTOM_SHEET_DATA,
@@ -14,39 +15,55 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-answer',
-  templateUrl: './answer.component.html',
-  styleUrls: ['./answer.component.css'],
+  selector: 'app-answer-drawing',
+  templateUrl: './answer-drawing.component.html',
+  styleUrls: ['./answer-drawing.component.css'],
 })
-export class AnswerComponent implements OnInit {
+export class AnswerDrawingComponent implements OnInit {
+  @ViewChild('file') file: ElementRef = new ElementRef(null);
   isSubmitting: boolean = false;
   constructor(
-    private sheet: MatBottomSheetRef<AnswerComponent>,
+    private sheet: MatBottomSheetRef<AnswerDrawingComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private http: HttpClient,
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
 
-  formGroup: FormGroup = new FormGroup({
-    answer: new FormControl('', Validators.required),
-  });
+  answers: any[] = [];
 
-  ngOnInit(): void {
-    this.formGroup.setValue({
-      answer: this.data.answer,
-    });
+  onFileChange(event: any) {
+    // Change to base64
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    const fileName = event.target.files[0].name;
+    const fileSize = event.target.files[0].size;
+
+    reader.onload = () => {
+      this.answers.push({
+        id: null,
+        data: reader.result,
+        name: fileName,
+        size: fileSize,
+      });
+    };
+
+    this.file.nativeElement.value = '';
+  }
+
+  removeFile(index: number) {
+    this.answers.splice(index, 1);
   }
 
   submitAnswer() {
     this.isSubmitting = true;
-    this.formGroup.disable();
     this.http
       .post(
-        `${environment.apiURL}test`,
+        `${environment.apiURL}test/files`,
         {
           questionID: this.data.id,
-          answer: this.formGroup.controls['answer'].value,
+          answer: null,
+          files: this.answers,
         },
         {
           headers: new HttpHeaders({
@@ -57,12 +74,12 @@ export class AnswerComponent implements OnInit {
         }
       )
       .subscribe({
-        next: (_) => {
+        next: (response: any) => {
           this.isSubmitting = false;
-          this.formGroup.enable();
-          this.sheet.dismiss(this.formGroup.controls['answer'].value);
+          this.sheet.dismiss(response);
         },
         error: (error) => {
+          this.isSubmitting = false;
           if (error.status == 401) {
             localStorage.removeItem('authorization');
             this.snackBar.open(
@@ -76,8 +93,6 @@ export class AnswerComponent implements OnInit {
             this.router.navigate(['/']);
             return;
           }
-          this.isSubmitting = false;
-          this.formGroup.enable();
 
           this.snackBar.open(
             'Mohon maaf ada kesalahan. Silahkan dicoba kembali.',
@@ -90,12 +105,8 @@ export class AnswerComponent implements OnInit {
       });
   }
 
-  onFileChange(event: any) {
-    // Change to Base64 pdf
-    const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = () => {
-      this.formGroup.controls['answer'].setValue(reader.result);
-    };
+  ngOnInit(): void {
+    console.log(this.data);
+    this.answers = this.data.files;
   }
 }

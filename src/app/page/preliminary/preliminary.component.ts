@@ -46,14 +46,16 @@ export class PreliminaryComponent implements OnInit {
           const submittedCV = data.submittedCV;
           const submittedTest = data.submittedTest;
 
-          if (submittedCV) {
+          console.log(data);
+
+          if (!submittedTest && submittedCV) {
             localStorage.setItem('authorization', authorization);
             this.isSubmitting = false;
             this.router.navigate(['/Quiz']);
             return;
           }
 
-          if (submittedTest) {
+          if (submittedCV && submittedTest) {
             this.snackBar.open(
               'Anda sudah pernah mengikuti test ini',
               'Tutup',
@@ -64,9 +66,12 @@ export class PreliminaryComponent implements OnInit {
             return;
           }
 
-          localStorage.setItem('authorization', authorization);
-          this.isSubmitting = false;
-          this.router.navigate(['/Information']);
+          if (!submittedCV && !submittedTest) {
+            localStorage.setItem('authorization', authorization);
+            this.isSubmitting = false;
+            this.router.navigate(['/Information']);
+            return;
+          }
         },
         error: (error) => {
           this.snackBar.open(error.error.message, 'Tutup', {

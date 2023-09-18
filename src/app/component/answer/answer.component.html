@@ -6,41 +6,11 @@
   <small>{{ data.notes == "" ? "Tidak ada keterangan." : data.notes }}</small>
 </p>
 
-<form
-  [formGroup]="formGroup"
-  (ngSubmit)="submitAnswer()"
-  *ngIf="data.type != 'drawing'"
->
+<form [formGroup]="formGroup" (ngSubmit)="submitAnswer()">
   <mat-form-field appearance="outline" class="w-100">
     <mat-label>Answer</mat-label>
     <textarea formControlName="answer" rows="10" matInput></textarea>
   </mat-form-field>
-
-  <button class="answer-button" [disabled]="!formGroup.valid || isSubmitting">
-    Answer
-  </button>
-</form>
-
-<!-- Create a PDF viewer -->
-
-<form
-  [formGroup]="formGroup"
-  *ngIf="data.type == 'drawing'"
-  (ngSubmit)="submitAnswer()"
->
-  <iframe
-    *ngIf="formGroup.get('answer')?.value != null"
-    [src]="formGroup.get('answer')?.value | safe"
-    class="w-100"
-    style="aspect-ratio: 1/1"
-  ></iframe>
-
-  <input
-    class="form-control mb-3 w-100"
-    type="file"
-    accept=".pdf"
-    (change)="onFileChange($event)"
-  />
 
   <button class="answer-button" [disabled]="!formGroup.valid || isSubmitting">
     Answer

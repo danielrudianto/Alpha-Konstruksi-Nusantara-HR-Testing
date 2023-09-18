@@ -4,6 +4,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AnswerDrawingComponent } from 'src/app/component/answer-drawing/answer-drawing.component';
 import { AnswerComponent } from 'src/app/component/answer/answer.component';
 import { ConfirmationDialogComponent } from 'src/app/component/confirmation-dialog/confirmation-dialog.component';
 import { environment } from 'src/environments/environment';
@@ -88,22 +89,43 @@ export class QuizComponent implements OnInit {
   }
 
   openQuestion(index: number) {
-    const sheet = this.sheet.open(AnswerComponent, {
-      data: {
-        id: this.questions[index].id,
-        question: this.questions[index].question,
-        attachment: this.questions[index].attachment,
-        notes: this.questions[index].notes,
-        answer: this.questions[index].answer,
-        type: this.questions[index].type,
-      },
-    });
+    if (this.questions[index].type == 'drawing') {
+      const sheet = this.sheet.open(AnswerDrawingComponent, {
+        data: {
+          id: this.questions[index].id,
+          question: this.questions[index].question,
+          attachment: this.questions[index].attachment,
+          notes: this.questions[index].notes,
+          answer: this.questions[index].answer,
+          type: this.questions[index].type,
+          files: this.questions[index].files,
+        },
+      });
 
-    sheet.afterDismissed().subscribe((data) => {
-      if (data) {
-        this.questions[index].answer = data;
-      }
-    });
+      sheet.afterDismissed().subscribe((data) => {
+        console.log(data);
+        if (data) {
+          this.questions[index].files = data.files;
+        }
+      });
+    } else {
+      const sheet = this.sheet.open(AnswerComponent, {
+        data: {
+          id: this.questions[index].id,
+          question: this.questions[index].question,
+          attachment: this.questions[index].attachment,
+          notes: this.questions[index].notes,
+          answer: this.questions[index].answer,
+          type: this.questions[index].type,
+        },
+      });
+
+      sheet.afterDismissed().subscribe((data) => {
+        if (data) {
+          this.questions[index].answer = data;
+        }
+      });
+    }
   }
 
   openConfirmation() {
@@ -144,7 +166,18 @@ export class QuizComponent implements OnInit {
           this.router.navigate(['/Success']);
         },
         error: (error) => {
-          console.log(error);
+          console.error(`[error]: ${error}`);
+          localStorage.removeItem('authorization');
+          this.isLoading = false;
+          this.snackBar.open(
+            'Berhasil mengisi jawaban ujian. Terima kasih atas waktunya.',
+            'Tutup',
+            {
+              duration: 1000,
+            }
+          );
+
+          this.router.navigate(['/Success']);
         },
       });
   }

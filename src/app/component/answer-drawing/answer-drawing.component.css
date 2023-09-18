@@ -1,0 +1,33 @@
+p {
+  font-family: "Poppins";
+  font-size: 1.2rem;
+  color: black;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+.answer-button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.75rem 2rem;
+  font-family: "Poppins";
+  font-size: 1rem;
+  transition: 0.3s all ease;
+}
+
+.answer-button:hover {
+  background-color: #333333;
+}
+
+.answer-button:disabled {
+  background-color: #d4d4d4;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.75rem 2rem;
+  font-family: "Poppins";
+  font-size: 1rem;
+  transition: 0.3s all ease;
+}

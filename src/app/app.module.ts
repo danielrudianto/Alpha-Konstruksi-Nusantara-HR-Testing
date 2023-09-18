@@ -12,6 +12,7 @@ import { QuizComponent } from './page/quiz/quiz.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatListModule } from '@angular/material/list';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -24,6 +25,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { MatNativeDateModule } from '@angular/material/core';
 import { TimerComponent } from './component/timer/timer.component';
@@ -34,6 +36,8 @@ import { TimePipe } from './pipes/time.pipe';
 import { AnswerComponent } from './component/answer/answer.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { SuccessPageComponent } from './page/success-page/success-page.component';
+import { LoginComponent } from './page/login/login.component';
+import { AnswerDrawingComponent } from './component/answer-drawing/answer-drawing.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +52,8 @@ import { SuccessPageComponent } from './page/success-page/success-page.component
     SafePipe,
     AnswerComponent,
     SuccessPageComponent,
+    LoginComponent,
+    AnswerDrawingComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +77,8 @@ import { SuccessPageComponent } from './page/success-page/success-page.component
     MatProgressSpinnerModule,
     MatCardModule,
     MatBottomSheetModule,
+    MatListModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

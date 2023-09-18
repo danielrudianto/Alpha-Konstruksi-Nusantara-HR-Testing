@@ -1,0 +1,41 @@
+<p>{{ data.question }}</p>
+<div [innerHTML]="data.attachment"></div>
+
+<label class="mb-0">Keterangan</label>
+<p class="mt-0">
+  <small>{{ data.notes == "" ? "Tidak ada keterangan." : data.notes }}</small>
+</p>
+
+<mat-list>
+  <mat-list-item
+    *ngFor="let answer of answers; index as i"
+    [matMenuTriggerFor]="menu"
+  >
+    <mat-icon matListItemIcon>attach_file</mat-icon>
+    <div matListItemTitle>{{ answer.name }}</div>
+    <div matListItemLine>{{ answer.size / 1024 | number : "0.2-2" }}kB</div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="removeFile(i)">
+        <mat-icon>delete</mat-icon>
+        <span>Remove file</span>
+      </button>
+    </mat-menu>
+  </mat-list-item>
+</mat-list>
+
+<!-- Create file input for 3 files -->
+<input
+  class="form-control w-100"
+  type="file"
+  #file
+  (change)="onFileChange($event)"
+  accept=".pdf, .dwg"
+/>
+
+<button
+  class="answer-button"
+  [disabled]="answers.length == 0 || isSubmitting"
+  (click)="submitAnswer()"
+>
+  Answer
+</button>
