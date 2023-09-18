@@ -26,13 +26,19 @@
             <div
               class="status-chip"
               [class.submitted]="
-                question.answer != null || question.files.length > 0
+                question.answer != null ||
+                (question.files && question.files.length > 0)
               "
             >
-              <span *ngIf="question.answer != null || question.files.length > 0"
+              <span
+                *ngIf="
+                  question.answer != null ||
+                  (question.files && question.files.length > 0)
+                "
                 >&#x2713;</span
               >{{
-                question.answer != null || question.files.length > 0
+                question.answer != null ||
+                (question.files && question.files.length > 0)
                   ? "Submitted"
                   : "Not submitted"
               }}

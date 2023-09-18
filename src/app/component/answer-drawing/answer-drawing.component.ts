@@ -106,7 +106,6 @@ export class AnswerDrawingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.answers = this.data.files;
   }
 }

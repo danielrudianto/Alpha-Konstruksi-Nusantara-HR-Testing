@@ -90,24 +90,34 @@ export class QuizComponent implements OnInit {
 
   openQuestion(index: number) {
     if (this.questions[index].type == 'drawing') {
-      const sheet = this.sheet.open(AnswerDrawingComponent, {
-        data: {
-          id: this.questions[index].id,
-          question: this.questions[index].question,
-          attachment: this.questions[index].attachment,
-          notes: this.questions[index].notes,
-          answer: this.questions[index].answer,
-          type: this.questions[index].type,
-          files: this.questions[index].files,
-        },
-      });
+      if (this.questions[index].files.length > 0) {
+        this.snackBar.open(
+          'Anda sudah mengunggah jawaban untuk soal ini.',
+          'Tutup',
+          {
+            duration: 1000,
+          }
+        );
+      } else {
+        const sheet = this.sheet.open(AnswerDrawingComponent, {
+          data: {
+            id: this.questions[index].id,
+            question: this.questions[index].question,
+            attachment: this.questions[index].attachment,
+            notes: this.questions[index].notes,
+            answer: this.questions[index].answer,
+            type: this.questions[index].type,
+            files: this.questions[index].files,
+          },
+        });
 
-      sheet.afterDismissed().subscribe((data) => {
-        console.log(data);
-        if (data) {
-          this.questions[index].files = data.files;
-        }
-      });
+        sheet.afterDismissed().subscribe((data) => {
+          if (data) {
+            this.questions[index].files = data.files;
+            console.log(this.questions[index].files);
+          }
+        });
+      }
     } else {
       const sheet = this.sheet.open(AnswerComponent, {
         data: {
