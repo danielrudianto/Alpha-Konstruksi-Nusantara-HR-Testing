@@ -99,7 +99,7 @@ export class QuizComponent implements OnInit {
           }
         );
       } else {
-        const sheet = this.sheet.open(AnswerDrawingComponent, {
+        const drawingSheet = this.sheet.open(AnswerDrawingComponent, {
           data: {
             id: this.questions[index].id,
             question: this.questions[index].question,
@@ -109,12 +109,14 @@ export class QuizComponent implements OnInit {
             type: this.questions[index].type,
             files: this.questions[index].files,
           },
+          disableClose: true,
         });
 
-        sheet.afterDismissed().subscribe((data) => {
-          if (data) {
-            this.questions[index].files = data.files;
-            console.log(this.questions[index].files);
+        drawingSheet.afterDismissed().subscribe((data) => {
+          if (data == undefined) {
+            return;
+          } else {
+            this.questions[index].files = data.files || [];
           }
         });
       }

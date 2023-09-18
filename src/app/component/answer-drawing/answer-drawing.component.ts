@@ -108,4 +108,8 @@ export class AnswerDrawingComponent implements OnInit {
   ngOnInit(): void {
     this.answers = this.data.files;
   }
+
+  closeDialog() {
+    this.sheet.dismiss(undefined);
+  }
 }

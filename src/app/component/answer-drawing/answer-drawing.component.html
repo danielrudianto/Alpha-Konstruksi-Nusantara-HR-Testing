@@ -25,7 +25,7 @@
 
 <!-- Create file input for 3 files -->
 <input
-  class="form-control w-100"
+  class="form-control w-100 mb-3"
   type="file"
   #file
   (change)="onFileChange($event)"
@@ -33,9 +33,13 @@
 />
 
 <button
-  class="answer-button"
+  class="answer-button me-3"
   [disabled]="answers.length == 0 || isSubmitting"
   (click)="submitAnswer()"
 >
   Answer
+</button>
+
+<button class="answer-button" [disabled]="isSubmitting" (click)="closeDialog()">
+  Close
 </button>
