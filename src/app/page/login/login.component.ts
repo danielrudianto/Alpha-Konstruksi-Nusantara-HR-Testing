@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -26,12 +26,17 @@ export class LoginComponent {
   login() {
     this.isSubmitting = true;
     this.http
-      .post(`${environment.apiURL}auth`, this.loginFormGroup.value)
+      .post(`${environment.apiURL}auth`, this.loginFormGroup.value, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }),
+      })
       .subscribe({
         next: (data: any) => {
           localStorage.setItem('authorization', data['token']);
           localStorage.setItem('name', data['name']);
-          
+
           this.router.navigate(['/Dashboard']);
         },
         error: (error: any) => {
