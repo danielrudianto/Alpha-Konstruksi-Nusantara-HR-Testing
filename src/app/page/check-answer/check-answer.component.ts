@@ -24,7 +24,7 @@ export class CheckAnswerComponent implements OnInit {
   ngOnInit(): void {
     const token = this.route.snapshot.params['token'];
     this.http
-      .get(`${environment.apiURL}/result/check-answer/${token}`, {
+      .get(`${environment.apiURL}result/check-answer/${token}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('authorization')}`,
         },
@@ -54,7 +54,7 @@ export class CheckAnswerComponent implements OnInit {
   updateScore(event: any, index: number) {
     this.http
       .put(
-        'http://localhost:5000/result/update-score',
+        `${environment.apiURL}result/update-score`,
         {
           id: this.answers[index].id,
           token: this.route.snapshot.params['token'],
@@ -79,7 +79,7 @@ export class CheckAnswerComponent implements OnInit {
   save() {
     this.http
       .post(
-        'http://localhost:5000/test/check',
+        `${environment.apiURL}test/check`,
         {
           token: this.route.snapshot.params['token'],
         },
