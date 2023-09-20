@@ -27,6 +27,7 @@
     "bootstrap": "^5.2.3",
     "ng2-pdf-viewer": "^10.0.0",
     "ngx-bootstrap": "^11.0.2",
+    "ngx-infinite-scroll": "^16.0.0",
     "ngx-quill": "^22.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

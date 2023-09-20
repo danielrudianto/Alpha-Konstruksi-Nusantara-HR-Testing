@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="container">
+  <div class="row justify-content-center py-5">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-10 col-12">
+      <img src="assets/images/login-admin.png" alt="login" class="w-100" />
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 d-md-block d-none">
+      <form [formGroup]="loginFormGroup">
+        <h1>Hi, welcome back!</h1>
+        <p>
+          Welcome to PT Alpha Konstruksi Nusantara Human Resource. Here we are
+          going to assess and view the results of our candidate. Hopefully we
+          can found the ones we need. Good luck!
+        </p>
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" />
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="loginFormGroup.invalid"
+          (click)="login()"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

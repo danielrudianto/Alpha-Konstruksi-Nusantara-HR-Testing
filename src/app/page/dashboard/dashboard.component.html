@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Hello, {{ name }}</h1>
+      <mat-chip-listbox aria-label="Fish selection">
+        <mat-chip-option
+          [selected]="selectedMode == 'all'"
+          [disabled]="isFetchingCandidates"
+          (click)="select('all')"
+          >All</mat-chip-option
+        ><mat-chip-option
+          [selected]="selectedMode == 'checked'"
+          [disabled]="isFetchingCandidates"
+          (click)="select('checked')"
+          >Checked</mat-chip-option
+        ><mat-chip-option
+          [selected]="selectedMode == 'unchecked'"
+          [disabled]="isFetchingCandidates"
+          (click)="select('unchecked')"
+          >Unchecked</mat-chip-option
+        ><mat-chip-option
+          [selected]="selectedMode == 'interview'"
+          [disabled]="isFetchingCandidates"
+          (click)="select('interview')"
+          >Interview</mat-chip-option
+        ><mat-chip-option
+          [selected]="selectedMode == 'failed'"
+          [disabled]="isFetchingCandidates"
+          (click)="select('failed')"
+          color="warn"
+          >Failed</mat-chip-option
+        >
+      </mat-chip-listbox>
+    </div>
+  </div>
+  <div class="row">
+    <div
+      class="col-12"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()"
+    >
+      <div class="card-wrapper" *ngFor="let c of candidates; index as i">
+        <mat-card>
+          <mat-card-content>
+            <div class="d-flex align-items-center">
+              <h3 class="mb-0" style="flex-grow: 1">
+                <strong>{{ c.curriculum.name }}</strong>
+              </h3>
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="check(i)">
+                  <mat-icon>done</mat-icon>
+                  <span>Check</span>
+                </button>
+                <button
+                  mat-menu-item
+                  (click)="interview(i)"
+                  [disabled]="c.token.currentStatus != 'checked'"
+                >
+                  <mat-icon>arrow_forward</mat-icon>
+                  <span>Interview</span></button
+                ><button
+                  mat-menu-item
+                  (click)="fail(i)"
+                  [disabled]="c.token.currentStatus != 'checked'"
+                >
+                  <mat-icon>delete</mat-icon>
+                  <span>failed</span>
+                </button>
+              </mat-menu>
+            </div>
+            <div class="d-flex align-items-center">
+              <p style="flex-grow: 1">{{ c.curriculum.email }}</p>
+              <button mat-icon-button (click)="copy(c.curriculum.email)">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+            <div class="d-flex align-items-center">
+              <p style="flex-grow: 1">{{ c.curriculum.phoneNumber }}</p>
+              <button mat-icon-button (click)="copy(c.curriculum.phoneNumber)">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+            <p>Age: {{ c.age | number : "0.0-0" }}</p>
+            <p>Result: {{ c.score }}</p>
+
+            <div class="currentStatus">{{ c.token.currentStatus }}</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

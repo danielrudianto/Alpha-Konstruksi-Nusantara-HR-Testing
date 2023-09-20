@@ -1,0 +1,26 @@
+.header {
+  font-family: "TW Cen MT";
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #000000;
+  line-height: 1.2;
+  letter-spacing: -0.05rem;
+}
+
+.end-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  padding: 0.5rem 0;
+  z-index: 10;
+}
+
+label {
+  font-family: "TW Cen MT";
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000000;
+  line-height: 1.2;
+  letter-spacing: -0.05rem;
+}

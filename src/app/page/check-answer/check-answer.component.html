@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mb-5 pb-5" *ngIf="!isLoading">
+      <h1>{{ curriculum.name }}</h1>
+      <p>{{ curriculum.dateOfBirth | date : "dd MMMM YYYY" }}</p>
+
+      <mat-accordion>
+        <mat-expansion-panel hideToggle *ngFor="let ans of answers; index as i">
+          <mat-expansion-panel-header>
+            <p class="header">Question #{{ i + 1 }} ({{ ans.score }} / 10)</p>
+          </mat-expansion-panel-header>
+          <p>{{ ans.question }}</p>
+          <mat-divider class="mb-3"></mat-divider>
+          <div
+            class="py-3"
+            [innerHTML]="ans.answer"
+            *ngIf="ans.answer != ''"
+          ></div>
+          <p *ngIf="ans.answer == ''">Tidak ada jawaban.</p>
+
+          <mat-divider class="mb-3"></mat-divider>
+          <label>Files</label>
+          <p *ngIf="!ans.files || ans.files.length == 0">
+            File tidak tersedia.
+          </p>
+          <mat-list>
+            <mat-list-item
+              *ngFor="let file of ans.files"
+              (click)="downloadFile(file)"
+            >
+              <span matListItemTitle>{{ file.name }}</span>
+              <span matListItemLine
+                >{{ file.size / 1024 | number : "0.0-2" }} kB</span
+              >
+            </mat-list-item>
+          </mat-list>
+          <mat-divider></mat-divider>
+          <label>Score</label>
+          <mat-slider
+            class="w-100"
+            discrete
+            max="10"
+            min="0"
+            showTickMarks="true"
+            step="1"
+          >
+            <input
+              type="range"
+              [(ngModel)]="ans.score"
+              matSliderThumb
+              (valueChange)="updateScore($event, i)"
+            />
+          </mat-slider>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>
+
+<div class="end-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <button mat-raised-button color="primary" (click)="save()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

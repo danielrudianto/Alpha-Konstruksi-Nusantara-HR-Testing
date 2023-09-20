@@ -1,0 +1,21 @@
+.card-wrapper {
+  display: inline-block;
+  width: 50%;
+  padding: 2rem;
+}
+
+mat-card {
+  padding: 1rem;
+  width: 100%;
+  display: inline-block;
+}
+
+.currentStatus {
+  background-color: #bd925c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 10px;
+  width: fit-content;
+  font-family: "TW Cen MT";
+}

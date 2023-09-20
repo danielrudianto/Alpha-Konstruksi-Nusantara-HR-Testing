@@ -26,6 +26,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { MatNativeDateModule } from '@angular/material/core';
 import { TimerComponent } from './component/timer/timer.component';
@@ -38,6 +43,9 @@ import { SafePipe } from './pipes/safe.pipe';
 import { SuccessPageComponent } from './page/success-page/success-page.component';
 import { LoginComponent } from './page/login/login.component';
 import { AnswerDrawingComponent } from './component/answer-drawing/answer-drawing.component';
+import { DashboardComponent } from './page/dashboard/dashboard.component';
+import { CheckAnswerComponent } from './page/check-answer/check-answer.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -54,6 +62,8 @@ import { AnswerDrawingComponent } from './component/answer-drawing/answer-drawin
     SuccessPageComponent,
     LoginComponent,
     AnswerDrawingComponent,
+    DashboardComponent,
+    CheckAnswerComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +89,12 @@ import { AnswerDrawingComponent } from './component/answer-drawing/answer-drawin
     MatBottomSheetModule,
     MatListModule,
     MatMenuModule,
+    MatChipsModule,
+    MatGridListModule,
+    MatExpansionModule,
+    MatProgressBarModule,
+    MatSliderModule,
+    InfiniteScrollModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
