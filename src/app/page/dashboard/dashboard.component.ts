@@ -17,6 +17,8 @@ export class DashboardComponent implements OnInit {
   candidates: any[] = [];
   candidateCount: number = 0;
 
+  isLastPage: boolean = false;
+
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar,
@@ -68,6 +70,11 @@ export class DashboardComponent implements OnInit {
 
           this.candidateCount = data.count;
           this.isFetchingCandidates = false;
+          if (this.candidates.length < 10) {
+            this.isLastPage = true;
+          } else {
+            this.isLastPage = false;
+          }
         },
         error: (error) => {
           this.snackBar.open(error.error.message, 'Tutup', {
@@ -139,6 +146,8 @@ export class DashboardComponent implements OnInit {
   }
 
   onScroll() {
+    if (this.isLastPage) return;
+    
     this.page = this.page + 1;
     this.fetchCandidates(this.page);
   }
