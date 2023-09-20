@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-check-answer',
@@ -23,7 +24,7 @@ export class CheckAnswerComponent implements OnInit {
   ngOnInit(): void {
     const token = this.route.snapshot.params['token'];
     this.http
-      .get('http://localhost:5000/result/check-answer/' + token, {
+      .get(`${environment.apiURL}/result/check-answer/${token}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('authorization')}`,
         },
