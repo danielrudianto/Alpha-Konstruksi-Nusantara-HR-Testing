@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QuestionCardComponent } from './component/question-card/question-card.component';
 import { CheckAnswerComponent } from './page/check-answer/check-answer.component';
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { InformationComponent } from './page/information/information.component';

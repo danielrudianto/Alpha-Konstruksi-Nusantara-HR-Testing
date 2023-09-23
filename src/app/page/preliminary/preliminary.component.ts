@@ -19,6 +19,7 @@ export class PreliminaryComponent implements OnInit {
   ) {}
 
   isSubmitting: boolean = false;
+  job: number = 0;
 
   formGroup: FormGroup = new FormGroup({
     token: new FormControl('', [Validators.required, Validators.minLength(1)]),

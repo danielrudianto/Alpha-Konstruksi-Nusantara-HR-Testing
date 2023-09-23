@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { QuestionCardComponent } from './component/question-card/question-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PreliminaryComponent } from './page/preliminary/preliminary.component';
@@ -46,11 +45,11 @@ import { AnswerDrawingComponent } from './component/answer-drawing/answer-drawin
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { CheckAnswerComponent } from './page/check-answer/check-answer.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { WebcamModule } from 'ngx-webcam';
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuestionCardComponent,
     PreliminaryComponent,
     QuizComponent,
     TimerComponent,
@@ -95,6 +94,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatProgressBarModule,
     MatSliderModule,
     InfiniteScrollModule,
+    WebcamModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
