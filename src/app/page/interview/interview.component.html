@@ -1,0 +1,11 @@
+
+<div class="video-grid">
+  <div *ngFor="let video of videos">
+    <video
+      [srcObject]="video.srcObject"
+      (loadedmetadata)="onLoadedMetadata($event)"
+      [muted]="video.muted"
+    >
+    </video>
+  </div>
+</div>

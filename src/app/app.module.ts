@@ -46,6 +46,10 @@ import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { CheckAnswerComponent } from './page/check-answer/check-answer.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { WebcamModule } from 'ngx-webcam';
+import { InterviewDashboardComponent } from './page/interview-dashboard/interview-dashboard.component';
+import { InterviewComponent } from './page/interview/interview.component';
+import { SocketIoModule } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -63,6 +67,8 @@ import { WebcamModule } from 'ngx-webcam';
     AnswerDrawingComponent,
     DashboardComponent,
     CheckAnswerComponent,
+    InterviewDashboardComponent,
+    InterviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +101,9 @@ import { WebcamModule } from 'ngx-webcam';
     MatSliderModule,
     InfiniteScrollModule,
     WebcamModule,
+    SocketIoModule.forRoot({
+      url: environment.apiURL,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],
