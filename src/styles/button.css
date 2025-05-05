@@ -1,0 +1,17 @@
+.btn-akn-secondary {
+  background-color: #bd925c;
+  color: white;
+  font-family: "Poppins";
+}
+
+.btn-akn-secondary:hover {
+  background-color: black!important;
+  color: white;
+  font-family: "Poppins";
+}
+
+.btn-akn-secondary:disabled {
+  background-color: #bd925c;
+  color: white;
+  font-family: "Poppins";
+}

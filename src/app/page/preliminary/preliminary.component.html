@@ -13,90 +13,110 @@
       </h2>
       <h1 id="department-text">Human Resource Department</h1>
       <h1 id="company-text">PT Alpha Konstruksi Nusantara</h1>
-      <p>
-        Hai, selamat datang di test online Engineer di PT Alpha Konstruksi
-        Nusantara. PT Alpha Konstruksi Nusantara merupakan sebuah perusahan
-        kontraktor berlokasi di Bekasi, Indonesia dengan spesialisasi dalam
-        bidang geoteknik dan subspesialis fondasi pengeboran (bored piles).
-        Dalam lebih dari 10 tahun pengalamannya, PT Alpha Konstruksi Nusantara
-        telah berhasil menyelesaikan beragam proyek di beragam daerah di
-        Nusantara.
-      </p>
+
+      <form [formGroup]="languageFormGroup">
+        <select
+          class="form-control mb-5"
+          style="width: 200px"
+          formControlName="language"
+        >
+          <option value="id">Bahasa</option>
+          <option value="en">English</option>
+        </select>
+      </form>
+
+      <div *ngIf="languageFormGroup.controls['language'].value == 'id'">
+        <p>
+          Hai, selamat datang di test online di PT Alpha Konstruksi Nusantara.
+          PT Alpha Konstruksi Nusantara merupakan sebuah perusahan kontraktor
+          berlokasi di Bekasi, Indonesia dengan spesialisasi dalam bidang
+          geoteknik dan subspesialis fondasi pengeboran (bored piles). Dalam
+          lebih dari 10 tahun pengalamannya, PT Alpha Konstruksi Nusantara telah
+          berhasil menyelesaikan beragam proyek di beragam daerah di Nusantara.
+        </p>
+
+        <p>Sebelum memulai, mohon lakukan persiapan sebagai berikut:</p>
+      </div>
+
+      <div *ngIf="languageFormGroup.controls['language'].value == 'en'">
+        <p>
+          Hi, welcome to the online test at PT Alpha Konstruksi Nusantara. PT
+          Alpha Konstruksi Nusantara is a contractor company located in Bekasi,
+          Indonesia, specializing in geotechnics and the sub-specialty of bored
+          pile foundations. With over 10 years of experience, PT Alpha
+          Konstruksi Nusantara has successfully completed various projects in
+          different regions across the archipelago.
+        </p>
+
+        <p>Before starting, please prepare as follows:</p>
+      </div>
+
+      <form [formGroup]="preliminaryFormGroup">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <input
+              class="form-check-input me-3"
+              type="checkbox"
+              formControlName="device"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              <span
+                *ngIf="languageFormGroup.controls['language'].value == 'id'"
+              >
+                Mohon siapkan device untuk membuat gambar dalam format
+                <b>CAD</b> dan <b>PDF</b>.
+              </span>
+              <span
+                *ngIf="languageFormGroup.controls['language'].value == 'en'"
+              >
+                Please prepare a device to create images in
+                <b>CAD</b> and <b>PDF</b> formats.
+              </span>
+            </label>
+          </li>
+          <li class="list-group-item">
+            <input
+              class="form-check-input me-3"
+              type="checkbox"
+              formControlName="internet"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              <span
+                *ngIf="languageFormGroup.controls['language'].value == 'id'"
+              >
+                Pastikan anda berada di tempat dengan koneksi internet yang
+                stabil.
+              </span>
+              <span
+                *ngIf="languageFormGroup.controls['language'].value == 'en'"
+              >
+                Make sure you are in a place with a stable internet connection.
+              </span>
+            </label>
+          </li>
+        </ul>
+
+        <button
+          class="btn btn-akn-secondary px-5 shadow mt-5"
+          type="submit"
+          [disabled]="preliminaryFormGroup.invalid"
+          (click)="openTokenInput()"
+        >
+          <span *ngIf="languageFormGroup.controls['language'].value == 'id'">
+            Mulai
+          </span>
+          <span *ngIf="languageFormGroup.controls['language'].value == 'en'">
+            Next
+          </span>
+        </button>
+      </form>
     </div>
-    <div
-      class="col-xl-4 col-lg-6 col-md-6 d-lg-block d-none"
-      data-aos="fade-up"
-      data-aos-duration="1000"
-    >
+    <div class="col-xl-4 col-lg-6 col-md-6 d-lg-block d-none">
       <img
         src="/assets/images/hero-image.png"
         alt="Drilling rig at one of PT Alpha Konstruksi Nusantara project"
         id="hero-image"
       />
-    </div>
-    <div class="row mt-3">
-      <div
-        class="col-xl-12 col-lg-12 col-md-12 col-12"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
-        <h2>Lowongan Tersedia</h2>
-        <p>
-          Terdapat <span>{{ job }}</span> posisi yang saat ini tersedia.
-        </p>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div
-        class="col-xl-4 col-lg-6 col-md-6 d-lg-block d-none"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
-        <img src="/assets/images/asset.png" alt="Asset" id="asset-image" />
-      </div>
-      <div
-        class="col-xl-8 col-lg-6 col-md-10 col-sm-10 col-12 mb-3"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
-        <p>
-          Test akan dilaksanakan dengan durasi 60 menit. Selama masa pengerjaan,
-          peserta diperbolehkan untuk mencari atau menelusuri jawaban via mesin
-          pencarian (search engine), namun setiap jawaban yang terdeteksi
-          melakukan plagiarisme akan dianggap gagal.
-        </p>
-
-        <p>Sebelum memulai, mohon lakukan persiapan sebagai berikut:</p>
-        <ul>
-          <li>
-            Mohon isikan biodata sesuai instruksi dalam ujian. Isi dengan data
-            data yang sebenar-benarnya.
-          </li>
-          <li>
-            Mohon siapkan device untuk membuat gambar dalam format
-            <b>CAD</b> dan <b>PDF</b>.
-          </li>
-          <li>
-            Pastikan bapak / ibu memiliki koneksi internet yang baik dan stabil.
-          </li>
-        </ul>
-
-        <p>
-          Apabila anda sudah siap, isikan nomor token yang telah diberikan
-          kepada anda disini.
-        </p>
-
-        <form [formGroup]="formGroup" (submit)="submit()">
-          <mat-form-field class="w-100" appearance="outline">
-            <mat-label>Token</mat-label>
-            <input matInput formControlName="token" />
-          </mat-form-field>
-
-          <button class="w-100" [disabled]="!formGroup.valid || isSubmitting">
-            Start
-          </button>
-        </form>
-      </div>
     </div>
   </div>
 </div>

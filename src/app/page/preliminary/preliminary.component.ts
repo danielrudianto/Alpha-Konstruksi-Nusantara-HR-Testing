@@ -1,10 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as Aos from 'aos';
 import { environment } from 'src/environments/environment';
+import { TokenInputComponent } from '../../component/token-input/token-input.component';
 
 @Component({
   selector: 'app-preliminary',
@@ -14,48 +16,47 @@ import { environment } from 'src/environments/environment';
 export class PreliminaryComponent implements OnInit {
   constructor(
     private router: Router,
-    private http: HttpClient,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
-  isSubmitting: boolean = false;
-  job: number = 0;
-
-  formGroup: FormGroup = new FormGroup({
-    token: new FormControl('', [Validators.required, Validators.minLength(1)]),
+  languageFormGroup: FormGroup = new FormGroup({
+    language: new FormControl('id', [Validators.required]),
   });
 
-  submit() {
-    this.isSubmitting = true;
-    // this.router.navigate(['/Information']);
-    this.http
-      .post(
-        `${environment.apiURL}token/check`,
-        {
-          token: this.formGroup.controls['token'].value,
-        },
-        {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          }),
+  preliminaryFormGroup: FormGroup = new FormGroup({
+    device: new FormControl(false, [Validators.requiredTrue]),
+    internet: new FormControl(false, [Validators.requiredTrue]),
+  });
+
+  ngOnInit(): void {
+    Aos.init();
+    this.languageFormGroup.controls['language'].valueChanges.subscribe(
+      (value) => {
+        if (value === 'en') {
+          this.router.navigate(['/en']);
+        } else {
+          this.router.navigate(['/']);
         }
-      )
-      .subscribe({
-        next: (data: any) => {
+      }
+    );
+  }
+
+  openTokenInput() {
+    this.dialog
+      .open(TokenInputComponent, {})
+      .afterClosed()
+      .subscribe((data) => {
+        if (data != null && data != '') {
           const authorization = data.token;
           const submittedCV = data.submittedCV;
           const submittedTest = data.submittedTest;
 
-          console.log(data);
-
           if (!submittedTest && submittedCV) {
             localStorage.setItem('authorization', authorization);
-            this.isSubmitting = false;
             this.router.navigate(['/Quiz']);
             return;
           }
-
           if (submittedCV && submittedTest) {
             this.snackBar.open(
               'Anda sudah pernah mengikuti test ini',
@@ -66,26 +67,12 @@ export class PreliminaryComponent implements OnInit {
             );
             return;
           }
-
           if (!submittedCV && !submittedTest) {
             localStorage.setItem('authorization', authorization);
-            this.isSubmitting = false;
             this.router.navigate(['/Information']);
             return;
           }
-        },
-        error: (error) => {
-          this.snackBar.open(error.error.message, 'Tutup', {
-            duration: 1000,
-          });
-        },
-      })
-      .add(() => {
-        this.isSubmitting = false;
+        }
       });
-  }
-
-  ngOnInit(): void {
-    Aos.init();
   }
 }

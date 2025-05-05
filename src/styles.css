@@ -1,10 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 /* Font family Poppins from assets/fonts/Poppins folder */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+/* include styles.label.css */
+@import url("styles/label.css");
+@import url("styles/button.css");
+@import url("styles/text.css");
+
+/* Create variable */
+:root {
+  --bg-light: #fff;
+  --bg-dark: #343a40;
+}
 
 html,
 body {
   height: 100%;
+  background-color: var(--bg-light);
 }
 body {
   margin: 0;
@@ -23,3 +34,6 @@ body {
 #motto-text span {
   color: #bd925c;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

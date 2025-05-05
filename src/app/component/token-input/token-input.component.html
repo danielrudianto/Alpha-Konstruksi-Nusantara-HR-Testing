@@ -1,0 +1,23 @@
+<mat-dialog-content>
+  <form [formGroup]="tokenFormGroup">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Token" formControlName="token" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    [disabled]="tokenFormGroup.invalid"
+    (click)="onSubmit()"
+  >
+    <mat-progress-spinner
+      *ngIf="isSubmitting"
+      mode="indeterminate"
+      diameter="10"
+    ></mat-progress-spinner>
+    <span *ngIf="!isSubmitting"> Next </span>
+  </button>
+</mat-dialog-actions>

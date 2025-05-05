@@ -30,6 +30,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { MatNativeDateModule } from '@angular/material/core';
 import { TimerComponent } from './component/timer/timer.component';
@@ -45,11 +47,17 @@ import { AnswerDrawingComponent } from './component/answer-drawing/answer-drawin
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { CheckAnswerComponent } from './page/check-answer/check-answer.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { WebcamModule } from 'ngx-webcam';
-import { InterviewDashboardComponent } from './page/interview-dashboard/interview-dashboard.component';
-import { InterviewComponent } from './page/interview/interview.component';
 import { SocketIoModule } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+import { AdministratorComponent } from './page/administrator/administrator.component';
+import { TestComponent } from './page/test/test.component';
+import { CreateTestComponent } from './page/test/create-test/create-test.component';
+import { TestDashboardComponent } from './page/test/test-dashboard/test-dashboard.component';
+import { SelectQuestionTypeComponent } from './page/test/create-test/select-question-type/select-question-type.component';
+import { CreateQuestionEssayComponent } from './page/test/create-test/create-question-essay/create-question-essay.component';
+import { CreateQuestionChoiceComponent } from './page/test/create-test/create-question-choice/create-question-choice.component';
+import { DataHeaderComponent } from './component/data-header/data-header.component';
+import { TokenInputComponent } from './component/token-input/token-input.component';
 
 @NgModule({
   declarations: [
@@ -67,8 +75,15 @@ import { environment } from 'src/environments/environment';
     AnswerDrawingComponent,
     DashboardComponent,
     CheckAnswerComponent,
-    InterviewDashboardComponent,
-    InterviewComponent,
+    AdministratorComponent,
+    TestComponent,
+    CreateTestComponent,
+    TestDashboardComponent,
+    SelectQuestionTypeComponent,
+    CreateQuestionEssayComponent,
+    CreateQuestionChoiceComponent,
+    DataHeaderComponent,
+    TokenInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,10 +115,11 @@ import { environment } from 'src/environments/environment';
     MatProgressBarModule,
     MatSliderModule,
     InfiniteScrollModule,
-    WebcamModule,
+    DragDropModule,
+    MatSidenavModule,
     SocketIoModule.forRoot({
       url: environment.apiURL,
-    })
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

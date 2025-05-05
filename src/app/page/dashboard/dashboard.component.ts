@@ -147,7 +147,7 @@ export class DashboardComponent implements OnInit {
 
   onScroll() {
     if (this.isLastPage) return;
-    
+
     this.page = this.page + 1;
     this.fetchCandidates(this.page);
   }

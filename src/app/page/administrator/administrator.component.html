@@ -1,0 +1,17 @@
+<div class="h-100">
+  <mat-drawer-container class="h-100" autosize>
+    <mat-drawer #drawer mode="side" opened>
+      <button *ngFor="let op of menuItems" [routerLink]="op.link">
+        <mat-icon>{{ op.icon }}</mat-icon> <span>{{ op.name }}</span>
+      </button>
+    </mat-drawer>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 py-3">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-container>
+</div>

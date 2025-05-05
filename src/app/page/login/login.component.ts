@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent {
   constructor(
-    private http: HttpClient,
+    private apiService: ApiService,
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
@@ -21,23 +21,28 @@ export class LoginComponent {
   loginFormGroup: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
+    rememberMe: new FormControl(false),
   });
 
   login() {
     this.isSubmitting = true;
-    this.http
-      .post(`${environment.apiURL}auth`, this.loginFormGroup.value, {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        }),
+    this.apiService
+      .post('auth', this.loginFormGroup.value)
+      .subscribe({
+        next: (data) => {},
+        error: (error) => {},
       })
+      .add(() => {
+        this.isSubmitting = false;
+      });
+    this.apiService
+      .post(`${environment.apiURL}auth`, this.loginFormGroup.value)
       .subscribe({
         next: (data: any) => {
           localStorage.setItem('authorization', data['token']);
           localStorage.setItem('name', data['name']);
 
-          this.router.navigate(['/Dashboard']);
+          this.router.navigate(['/Administrator']);
         },
         error: (error: any) => {
           this.snackBar.open(

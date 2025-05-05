@@ -1,7 +1,25 @@
-h1 {
-  font-family: "TW Cen MT";
-  color: black;
-  font-size: 4rem;
-  font-weight: bold;
-  letter-spacing: -0.1rem;
+#login-body {
+  background-image: url("../../../assets/images/portal-login-bg.png");
+  background-position: center;
+  background-size: cover;
+  max-width: 100%;
+  min-height: 100vh;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.login-page {
+  height: auto;
+  width: 100%;
+  max-width: 1080px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.card-image-login {
+  background-image: url("../../../assets/images/asset.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }

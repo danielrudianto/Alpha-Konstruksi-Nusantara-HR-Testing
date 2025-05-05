@@ -1,0 +1,30 @@
+mat-drawer {
+  width: 200px;
+}
+
+button {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  align-items: center;
+  font-family: "TW Cen MT";
+  color: rgb(105, 105, 105);
+  transition: 0.3s all ease;
+}
+
+button mat-icon {
+  margin-right: 1rem;
+}
+
+button span {
+  font-size: 1.25rem;
+}
+
+button:hover {
+  background-color: #bd925c;
+  color: white;
+}

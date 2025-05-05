@@ -1,0 +1,20 @@
+<h1>Available Tests</h1>
+<app-data-header
+  [addAvailable]="true"
+  (onAddData)="createTest()"
+></app-data-header>
+<table class="table w-100">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Details</th>
+      <th>Created</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let test of tests">
+      <td></td>
+    </tr>
+  </tbody>
+</table>
