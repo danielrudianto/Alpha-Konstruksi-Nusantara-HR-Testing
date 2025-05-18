@@ -8,6 +8,7 @@
               <form
                 [formGroup]="loginFormGroup"
                 class="d-flex flex-column gap-3 p-4"
+                (ngSubmit)="login()"
               >
                 <label
                   class="form-label fw-bold fs-3 h1 text-akn-blue mb-0"
@@ -55,7 +56,6 @@
 
                 <button
                   class="btn btn-akn-secondary col-12 mb-3"
-                  type="submit"
                   [disabled]="!loginFormGroup.valid"
                 >
                   Login
