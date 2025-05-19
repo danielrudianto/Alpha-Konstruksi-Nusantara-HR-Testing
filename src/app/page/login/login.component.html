@@ -8,6 +8,7 @@
               <form
                 [formGroup]="loginFormGroup"
                 class="d-flex flex-column gap-3 p-4"
+                (ngSubmit)="login()"
               >
                 <label
                   class="form-label fw-bold fs-3 h1 text-akn-blue mb-0"
