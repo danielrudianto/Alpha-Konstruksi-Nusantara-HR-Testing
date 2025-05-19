@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit {
   }
 
   check(i: number) {
-    this.router.navigate(['/Check/' + this.candidates[i]['token']['token']]);
+    this.router.navigate(['Administrator/Check/' + this.candidates[i]['token']['token']]);
   }
 
   interview(i: number) {

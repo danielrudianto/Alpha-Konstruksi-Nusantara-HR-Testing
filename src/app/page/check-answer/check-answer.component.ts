@@ -95,7 +95,7 @@ export class CheckAnswerComponent implements OnInit {
             duration: 1000,
           });
 
-          this.router.navigate(['/Dashboard']);
+          this.router.navigate(['/Administrator']);
         },
         error: (error) => {
           this.snackBar.open(error.error.message, 'Tutup', {

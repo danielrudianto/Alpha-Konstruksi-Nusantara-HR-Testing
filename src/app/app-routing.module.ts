@@ -47,6 +47,10 @@ const routes: Routes = [
         component: DashboardComponent,
       },
       {
+        path: "Check/:token",
+        component: CheckAnswerComponent,
+      },
+      {
         path: 'Test',
         component: TestDashboardComponent,
         children: [
