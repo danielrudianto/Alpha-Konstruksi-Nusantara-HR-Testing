@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   apiURL: 'https://api.alphakonstruksi.id/',
   peerURL: 'api.alphakonstruksi.id'
 };
