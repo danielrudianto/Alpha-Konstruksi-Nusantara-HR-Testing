@@ -75,6 +75,14 @@
                   <mat-icon>delete</mat-icon>
                   <span>failed</span>
                 </button>
+                <button
+                  mat-menu-item
+                  (click)="fail(i)"
+                  [disabled]="c.token.currentStatus != 'interview'"
+                >
+                  <mat-icon>arrow_forward</mat-icon>
+                  <span>Failed after interview</span>
+                </button>
               </mat-menu>
             </div>
             <div class="d-flex align-items-center">
